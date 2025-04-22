@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservar Turno - El Cielo en la Tierra</title>
+  <link rel="stylesheet" href="css/styleTurnos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo-nav">
+      <img src="img/logo.jpg" alt="Logo Spa" class="logo" />
+      <h1>El cielo en la tierra</h1>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="servicios.html">Servicio</a></li>
+        <li><a href="turno.html">Turnos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="turnos-container">
+    <section class="turnos-visual">
+      <img src="img/turnosBanner.jpg" alt="TURNOS" />
+      <h2>TURNOS</h2>
+    </section>
+
+    <section class="formulario-section">
+      <h2>Solicita tu turno</h2>
+      <form id="form-turno" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre completo" required />
+        <input type="email" name="email" placeholder="Correo electrónico" required />
+        <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
+        <input type="date" name="fecha" required />
+        <select name="servicio" required>
+          <option value="">Seleccioná un servicio</option>
+          <option value="Masaje">Masaje</option>
+          <option value="Belleza">Belleza</option>
+          <option value="Facial">Tratamiento Facial</option>
+          <option value="Corporal">Tratamiento Corporal</option>
+          <option value="Yoga">Sesión de Yoga</option>
+        </select>
+        <textarea name="comentarios" placeholder="Comentarios adicionales"></textarea>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Enviar solicitud</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="social-contacto">
+      <div class="redes">
+        <p><strong>Redes sociales</strong></p>
+        <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#"><i class="fab fa-x-twitter fa-lg"></i></a>
+      </div>
+      <div class="contacto">
+        <p><i class="fas fa-phone"></i> +54 9 11 2345-6789</p>
+        <p><i class="fas fa-envelope"></i> contacto@elcieloenlatierra.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Av. del Bienestar 1234, Barrio Tranquilo, Ciudad Zen</p>
+      </div>
+    </div>
+    <div class="logo-footer">
+      <img src="img/logo.jpg" alt="Logo footer" />
+      <p>© 2025 El Cielo en la Tierra</p>
+    </div>
+  </footer>
+
+  <script src="js/turno.js"></script>
+
+</body>
+</html>
+
+

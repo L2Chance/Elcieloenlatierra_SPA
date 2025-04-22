@@ -1,0 +1,214 @@
+/* styleTurnos.css - Estilos para la página de turnos */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5fbfc;
+    color: #333;
+  }
+  
+  header.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0b6e75;
+    color: white;
+    padding: 1rem 2rem;
+  }
+  
+  .logo-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo {
+    width: 50px;
+    height: auto;
+    background: transparent;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .turnos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem 2rem;
+  }
+  
+  .turnos-visual {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .turnos-visual img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+  }
+  
+  .turnos-visual h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }  
+  
+  .formulario-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 450px;
+  }
+  
+  .formulario-section h2 {
+    text-align: center;
+    color: #0b6e75;
+    margin-bottom: 1rem;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  button {
+    background-color: #0b6e75;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #084e54;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .turnos-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .formulario-section {
+      max-width: 100%;
+    }
+  }
+
+ /* styleFooter.css - Ajuste en la distribución del footer */
+
+.footer {
+  background-color: #0b6e75;
+  color: white;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* Distribuye los bloques de manera uniforme */
+  align-items: center;
+  text-align: center;
+}
+
+.social-contacto {
+  display: flex;
+  justify-content: space-evenly; /* Espaciado uniforme entre los bloques */
+  gap: 2rem;
+  flex: 1;
+}
+
+.redes {
+  text-align: center;
+}
+
+.redes a {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.redes a:hover {
+  transform: scale(1.2);
+}
+
+.contacto {
+  text-align: center;
+}
+
+.contacto p {
+  margin: 0.5rem 0;
+}
+
+.logo-footer {
+  text-align: center;
+}
+
+.logo-footer img {
+  width: 80px;
+  height: auto;
+}
+
+.logo-footer p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-contacto {
+    flex-direction: column;
+    align-items: center;
+  }
+}

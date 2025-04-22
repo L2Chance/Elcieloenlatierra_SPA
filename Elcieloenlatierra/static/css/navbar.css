@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poetsen+One&display=swap");
+
+.barra {
+  width: 100%;
+  height: 150px;
+  background-color: #006a71;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.imagen-logo {
+  height: 130px;
+  width: auto;
+}
+
+.imagen-titulo {
+  height: 80px;
+  width: auto;
+}
+
+.navbar {
+  margin-left: auto;
+  margin-right: 5rem;
+  color: #f2efe7;
+}
+
+.menu-navbar {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 2rem;
+}
+
+.menu-navbar li {
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  color: whitesmoke;
+  transition: transform 0.3s ease;
+}
+
+.menu-navbar li:hover {
+  transform: scale(1.2);
+}
