@@ -1,111 +1,80 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Servicios - El Cielo en la Tierra</title>
-  <link rel="stylesheet" href="css/StyleServicios.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-  <header class="topbar">
-    <div class="logo-nav">
-      <img src="img/logo.jpg" alt="Logo Spa" class="logo">
-      <h1>El Cielo en la Tierra</h1>
+{% extends "base/base.html" %} 
+
+{% load static %} 
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/servicios.css' %}" />
+{% endblock %} 
+
+{% block content %}
+
+<section class="section-one">
+
+  <section class="turnos-visual">
+    <img src="/static/img/adorno-two.jpg" alt="SERVICIOS" />
+    <h2>SERVICIOS</h2>
+  </section>
+
+
+  <div class="container-servicios">
+    <div class="container-card">
+      <img src="/static/img/masajes.jpg" alt="" />
+      <p class="title">Masajes</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
     </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="turno.html">Turnos</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main class="contenedor-servicios">
-    <aside class="imagen-servicios">
-      <img src="img/velas.jpg" alt="Velas spa">
-      <h2>Servicios</h2>
-    </aside>
-
-    <section class="cards-servicios">
-      <div class="card">
-        <div class="card-header">MASAJES</div>
-        <img src="img/masajes.jpg" alt="Masajes relajantes" class="imagen-servicio">
-        <ul>
-          <li>Anti-stress</li>
-          <li>Descontracturantes</li>
-          <li>Piedras calientes</li>
-          <li>Circulatorios</li>
-        </ul>
-        <a href="masajes.html" class="btn">Ver más</a>
-      </div>
-
-      <div class="card">
-        <div class="card-header">BELLEZA</div>
-        <img src="img/belleza.jpg" alt="Tratamientos de belleza" class="imagen-servicio">
-        <ul>
-          <li>Lifting de pestañas</li>
-          <li>Depilación facial</li>
-          <li>Manos y pies</li>
-        </ul>
-        <a href="belleza.html" class="btn">Ver más</a>
-      </div>
-
-      <div class="card">
-        <div class="card-header">FACIALES</div>
-        <img src="img/puntaDeDiamante.jpg" alt="Faciales" class="imagen-servicio">
-        <ul>
-          <li>Punta de Diamante</li>
-          <li>Limpieza profunda</li>
-          <li>Crio facial</li>
-        </ul>
-        <a href="faciales.html" class="btn">Ver más</a>
-      </div>
-
-      <div class="card">
-        <div class="card-header">CORPORALES</div>
-        <img src="img/ultracavitacion.jpg" alt="Tratamientos corporales" class="imagen-servicio">
-        <ul>
-          <li>VelaSlim</li>
-          <li>DermoHealth</li>
-          <li>Crio corporal</li>
-          <li>Ultracavitación</li>
-        </ul>
-        <a href="corporales.html" class="btn">Ver más</a>
-      </div>
-
-      <div class="card">
-        <div class="card-header">GRUPALES</div>
-        <img src="img/yoga.jpg" alt="Grupales" class="imagen-servicio">
-        <ul>
-          <li>Hidromasajes</li>
-          <li>Yoga</li>
-        </ul>
-        <a href="grupales.html" class="btn">Ver más</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="social-contacto">
-      <div class="redes">
-        <p><strong>Redes sociales</strong></p>
-        <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
-        <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
-        <a href="#"><i class="fab fa-x-twitter fa-lg"></i></a>
-      </div>
-      <div class="contacto">
-        <p><i class="fas fa-phone"></i> +54 9 11 2345-6789</p>
-        <p><i class="fas fa-envelope"></i> contacto@elcieloenlatierra.com</p>
-        <p><i class="fas fa-map-marker-alt"></i> Av. del Bienestar 1234, Barrio Tranquilo, Ciudad Zen</p>
-      </div>
+    <div class="container-card">
+      <img src="/static/img/belleza.jpg" alt="" />
+      <p class="title">Belleza</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
     </div>
-    <div class="logo-footer">
-      <img src="img/logo.jpg" alt="Logo footer" />
-      <p>© 2025 El Cielo en la Tierra</p>
+
+    <div class="container-card">
+      <img src="/static/img/masajes.jpg" alt="" />
+      <p class="title">Masajes</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
     </div>
-  </footer>
-</body>
-</html>
+
+    <div class="container-card">
+      <img src="/static/img/belleza.jpg" alt="" />
+      <p class="title">Belleza</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
+    </div>
+
+    <div class="container-card">
+      <img src="/static/img/masajes.jpg" alt="" />
+      <p class="title">Masajes</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
+    </div>
+
+    <div class="container-card">
+      <img src="/static/img/belleza.jpg" alt="" />
+      <p class="title">Belleza</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
+    </div>
+
+    <div class="container-card">
+      <img src="/static/img/masajes.jpg" alt="" />
+      <p class="title">Masajes</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
+    </div>
+
+    <div class="container-card">
+      <img src="/static/img/belleza.jpg" alt="" />
+      <p class="title">Belleza</p>
+      <div class="overlay"></div>
+      <div class="button"><a href="#"> VER MÁS </a></div>
+    </div>
+      
+  </div>
+
+</section>
+
+{% endblock %}

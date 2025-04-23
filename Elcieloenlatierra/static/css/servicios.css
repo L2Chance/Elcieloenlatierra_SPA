@@ -1,0 +1,125 @@
+.section-one{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    gap: 1rem;
+}
+
+.turnos-visual {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .turnos-visual img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    filter: brightness(60%);
+  }
+  
+  .turnos-visual h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 800;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }  
+
+  .container-servicios{
+    height: 900px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-radius: 3rem;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/*CARDS*/
+
+.container-card {
+    position: relative;
+    width: 300px;
+    height: 180px;
+    border-radius: 2rem;
+}
+
+.container-card img {
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    left: 0;
+    border-radius: 2rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+    border-radius: 2rem;
+}
+
+.container-card:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 55px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    z-index: 1;
+    transition: top 0.5s ease;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.container-card:hover .title {
+    top: 45px;
+}
+
+.button {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 125px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.button a {
+    display: inline-block;
+    width: auto;
+    padding: 8px 28px;
+    font-size: 13px;
+    color: white;
+    border: solid 2px white;
+    z-index: 1;
+    text-decoration: none;
+}
+
+.container-card:hover .button {
+    opacity: 1;
+}

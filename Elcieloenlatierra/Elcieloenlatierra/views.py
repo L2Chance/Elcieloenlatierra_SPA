@@ -19,3 +19,7 @@ def mostrar_login(request):
 def mostrar_turno(request):
     return render(request, "turno.html")
 
+def mostrar_servicios(request):
+    return render(request, "servicios.html")
+
+
