@@ -11,6 +11,11 @@
         <li><a href="/turno" class="boton">
           <i class="fas fa-paper-plane"></i> Pedir turno
         </a></li>
+        {% if user.is_authenticated and user.is_superuser%}
+        <li><a href="/servicios/nuevo" class="boton">
+          <i class="fas fa-paper-plane"></i> Añadir Servicio
+        </a></li>
+        {% endif %}
       </ul>
     </nav>
   </div>
