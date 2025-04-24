@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poetsen+One&display=swap");
+
+.barra-footer {
+  width: 100%;
+  height: 250px;
+  background-color: #006a71;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fragmento-primero {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  color: #f2efe7;
+}
+
+.fragmento-segundo {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  border-left: 0.5rem solid #9acbd0;
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  color: #f2efe7;
+  gap: 1rem;
+}
+
+.fragmento-segundo h4 {
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.fragmento-tercero {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 0.5rem solid #9acbd0;
+  font-family: "Poetsen One", cursive;
+  font-weight: 600;
+  color: #f2efe7;
+}
+
+.fragmento-tercero img {
+  height: 150px;
+  width: auto;
+}
+
+.redes-sociales-lista {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.contacto-lista {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-size: 12px;
+  padding: 0;
+  margin-left: 1rem;
+  gap: 1rem;
+}
+
+.contacto-lista li {
+  display: flex;
+  align-items: center;
+}
+
+.contacto-lista li img {
+  width: 2rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.redes-sociales-lista li img {
+  width: 3rem;
+  height: auto;
+}
+
+.red-social-icono {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.red-social-icono:hover {
+  transform: scale(1.2);
+  filter: brightness(1.3) drop-shadow(0 0 5px #fff);
+}

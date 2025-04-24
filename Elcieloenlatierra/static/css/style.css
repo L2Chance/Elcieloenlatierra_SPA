@@ -1,0 +1,235 @@
+header.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0b6e75;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.logo-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  background: transparent;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  display: block;
+  object-fit: cover;
+}
+
+.populares {
+  padding: 2rem;
+  text-align: center;
+  background-color: #d1f3f6;
+}
+
+.populares h2 {
+  font-size: 2rem;
+  color: #0b6e75;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  color: #0b6e75;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.5rem 0 1rem;
+}
+
+.btn {
+  background-color: #0b6e75;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.encuentranos {
+  padding: 2rem;
+  background-color: #a1f1fa;
+  text-align: center;
+}
+
+.mapa-contacto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+iframe {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+.whatsapp {
+  background-color: #2dbd7f;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-extra {
+  background-image: url("../img/fondo-toalla.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.info-extra h2 {
+  margin-bottom: 2rem;
+}
+
+.extra-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.btn-icon {
+  background-color: #0b6e75;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* styleFooter.css - Ajuste en la distribución del footer */
+
+.footer {
+  background-color: #0b6e75;
+  color: white;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* Distribuye los bloques de manera uniforme */
+  align-items: center;
+  text-align: center;
+}
+
+.social-contacto {
+  display: flex;
+  justify-content: space-evenly; /* Espaciado uniforme entre los bloques */
+  gap: 2rem;
+  flex: 1;
+}
+
+.redes {
+  text-align: center;
+}
+
+.redes a {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.redes a:hover {
+  transform: scale(1.2);
+}
+
+.contacto {
+  text-align: center;
+}
+
+.contacto p {
+  margin: 0.5rem 0;
+}
+
+.logo-footer {
+  text-align: center;
+}
+
+.logo-footer img {
+  width: 80px;
+  height: auto;
+}
+
+.logo-footer p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-contacto {
+    flex-direction: column;
+    align-items: center;
+  }
+}

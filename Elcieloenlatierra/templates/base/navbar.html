@@ -1,0 +1,22 @@
+<body>
+  <div class="barra">
+    <img class="imagen-logo" src="/static/img/Logo png.png" alt="Logo" />
+    <img class="imagen-titulo" src="/static/img/Titulo.png" alt="Titulo">
+    <nav class="navbar">
+      <ul class="menu-navbar">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/servicios">Servicios</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+        <li><a href="#">Sobre Nosotros</a></li>
+        <li><a href="/turno" class="boton">
+          <i class="fas fa-paper-plane"></i> Pedir turno
+        </a></li>
+        {% if user.is_authenticated and user.is_superuser%}
+        <li><a href="/servicios/nuevo" class="boton">
+          <i class="fas fa-paper-plane"></i> Añadir Servicio
+        </a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</body>

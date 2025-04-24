@@ -1,0 +1,259 @@
+.section-one{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    gap: 1rem;
+}
+
+.turnos-visual {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .turnos-visual img {
+    width: 500px;
+    height: 1000px;
+    display: block;
+    border-radius: 10px;
+    filter: brightness(60%);
+  }
+  
+  .turnos-visual h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 800;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }  
+
+  .container-servicios{
+    height: 1000px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-radius: 3rem;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/*CARDS*/
+
+.container-card {
+    position: relative;
+    width: 300px;
+    height: 2180px;
+    border-radius: 2rem;
+}
+
+.container-card img {
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    left: 0;
+    border-radius: 2rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+    border-radius: 2rem;
+}
+
+.container-card:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 55px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    z-index: 1;
+    transition: top 0.5s ease;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.container-card:hover .title {
+    top: 45px;
+}
+
+.button {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 125px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.button a {
+    display: inline-block;
+    width: auto;
+    padding: 8px 28px;
+    font-size: 13px;
+    color: white;
+    border: solid 2px white;
+    z-index: 1;
+    text-decoration: none;
+}
+
+.container-card:hover .button {
+    opacity: 1;
+}
+
+/* Botones estáticos con estilo de las cards */
+.button-static {
+    position: absolute;
+    bottom: 10px;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 1.5rem; /* Bordes redondeados similares a las cards */
+    background-color: #131419; /* Fondo oscuro como las cards avanzadas */
+    color: white;
+    pointer-events: none; /* Hace el botón no interactuable */
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.1),
+                2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Hover para dar efecto dinámico (aunque no es interactuable) */
+.container-card:hover .button-static {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño en hover */
+    background-color: #03a9f4; /* Cambia el color de fondo en hover */
+}
+/* Botón en la esquina inferior izquierda */
+.button-left {
+    left: 10px;
+}
+
+/* Botón en la esquina inferior derecha */
+.button-right {
+    right: 10px;
+}
+
+
+
+
+
+/* Nueva sección para las cards avanzadas */
+.card {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: #131419;
+    overflow: hidden;
+    box-shadow: -5px -5px 10px rgba(255,255,255,0.05),
+                5px 5px 15px rgba(0,0,0,0.5);
+    border-radius: 2rem; /* Igual a las cards actuales */
+}
+
+/* Estilo del checkbox y botón switch */
+.card input,
+.card .switch {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    right: 10px;
+    outline: none;
+    z-index: 2;
+}
+
+.card input {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.card .switch {
+    pointer-events: none;
+    border-radius: 50%;
+    color: #03a9f4;
+    background-color: #131419;
+    transition: 0.5s;
+    text-align: center;
+    line-height: 50px;
+    font-size: 32px;
+    box-shadow: 0 0 0 0px #131419;
+}
+
+.card input:checked ~ .switch {
+    box-shadow: 0 0 0 500px #131419;
+    transform: rotate(225deg);
+}
+
+/* Estilos de la imagen */
+.card img {
+    width: 300px;
+    height: 300px;
+    border-radius: 2rem; /* Para mantener consistencia */
+}
+
+/* Fondo de imagen y contenido */
+.card .imgBg,
+.card .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card .content {
+    padding: 15px;
+    box-sizing: border-box;
+    z-index: 3;
+    pointer-events: none;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.card input:checked ~ .content {
+    opacity: 1;
+    transition-delay: 0.5s;
+}
+
+.card .content h1 {
+    color: #03a9f4;
+}
+
+.card .content p {
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Cabin', sans-serif;
+    line-height: 25px;
+}
+
+/* Ajustes generales */
+body {
+    background-color: #f9f9f9; /* Cambiando para no afectar el diseño global */
+}
