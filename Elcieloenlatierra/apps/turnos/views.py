@@ -41,4 +41,4 @@ def solicitud_turno(request):
 
         return redirect('gracias')  # redirige a una vista de confirmación
 
-    return render(request, 'solicitud_turno.html')
+    return render(request, 'turnos/formularios/solicitud_turno.html')

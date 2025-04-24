@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.turnos',
     'apps.usuarios',
+    'apps.servicios',
+    'apps.contacto',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +49,9 @@ ROOT_URLCONF = 'Elcieloenlatierra.urls'
 
 STATIC_URL = '/static/' #Esta linea le indica a django cuál es la carpeta de los recursos estáticos. 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 TEMPLATES = [
     {
@@ -108,3 +113,4 @@ USE_I18N = True
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

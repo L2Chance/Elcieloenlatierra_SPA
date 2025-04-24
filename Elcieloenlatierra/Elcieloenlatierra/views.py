@@ -19,6 +19,6 @@ def mostrar_login(request):
     return render(request, "login.html")
 
 def mostrar_servicios(request):
-    return render(request, "servicios.html")
+    return render(request, "servicios/servicios.html")
 
 

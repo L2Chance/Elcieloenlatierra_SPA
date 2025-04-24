@@ -23,6 +23,6 @@ urlpatterns = [
     path('servicios', views.mostrar_servicios),
     path('', include('apps.turnos.urls')), 
     path('', include('apps.usuarios.urls')),
-
+    path('servicios/', include('apps.servicios.urls')),
 
 ]
