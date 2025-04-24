@@ -43,3 +43,19 @@
 .menu-navbar li:hover {
   transform: scale(1.2);
 }
+
+ul li .boton {
+  background-color: #d6d851;
+  color: rgb(0, 0, 0);
+  border: 1rem solid #d6d851;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+ul li .boton:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}

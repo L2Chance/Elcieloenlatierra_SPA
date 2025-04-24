@@ -8,16 +8,15 @@ de alguna pagina de nuestro sitio.
 
 """
 
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 def mostrar_home(request):
     return render(request, "home.html")
 
 def mostrar_login(request):
     return render(request, "login.html")
-
-def mostrar_turno(request):
-    return render(request, "turno.html")
 
 def mostrar_servicios(request):
     return render(request, "servicios.html")

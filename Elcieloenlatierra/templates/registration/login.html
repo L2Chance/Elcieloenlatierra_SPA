@@ -1,0 +1,28 @@
+{% extends "base/base.html" %} 
+
+{% load static %} 
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+{% endblock %} 
+
+{% block content %}
+
+<div class="turnos-container">
+  <section class="turnos-visual">
+    <img src="/static/img/adorno-one.jpg" alt="TURNOS" />
+    <h2>LOGIN</h2>
+  </section>
+
+  <section class="formulario-section">
+    <h2>LOGIN</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>    
+  </section>
+</div>
+
+{% endblock %}

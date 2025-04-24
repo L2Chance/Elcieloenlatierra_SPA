@@ -12,16 +12,17 @@ que esa función debe mostrar el archivo home.html.
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.mostrar_home),
-    path('home', views.mostrar_home),
-    path('login', views.mostrar_login),
-    path('turno', views.mostrar_turno),
+    path('home', views.mostrar_home, name='home'),
     path('servicios', views.mostrar_servicios),
+    path('', include('apps.turnos.urls')), 
+    path('', include('apps.usuarios.urls')),
+
 
 ]
