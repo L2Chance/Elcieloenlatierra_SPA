@@ -16,25 +16,18 @@
 
   <section class="formulario-section">
     <h2>Solicita tu turno</h2>
-    <form id="form-turno" method="POST" action="{% url 'solicitud_turno' %}">
-      <input type="hidden" name="next" value="{{ next }}">
+    <form method="POST">
       {% csrf_token %}
-      <input type="text" name="nombre" placeholder="Nombre completo" required />
-      <input type="email" name="email" placeholder="Correo electrónico" required />
-      <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
-      <input type="date" name="fecha" required />
-      <select name="servicio" required>
-        <option value="">Seleccioná un servicio</option>
-        <option value="Masaje">Masaje</option>
-        <option value="Belleza">Belleza</option>
-        <option value="Facial">Tratamiento Facial</option>
-        <option value="Corporal">Tratamiento Corporal</option>
-        <option value="Yoga">Sesión de Yoga</option>
-      </select>
-      <textarea name="comentarios" placeholder="Comentarios adicionales"></textarea>
+      {{ form.as_p }}
       <button type="submit"><i class="fas fa-paper-plane"></i> Enviar solicitud</button>
     </form>
   </section>
 </div>
+
+{% if enviado %}
+<script>
+  mostrarAlertaExitosa('¡Turno registrado con exito!', 'Tu formulario fue enviado correctamente.');
+</script>
+{% endif %}
 
 {% endblock %}
