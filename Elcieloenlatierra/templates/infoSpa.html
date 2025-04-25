@@ -1,0 +1,38 @@
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/infoSpa.css' %}" />
+{% endblock %} {% block content %}
+
+<main class="sobre-nosotros">
+  <div class="imagen">
+    <img src="{% static 'img/SpaEntrada.jpeg' %}" alt="Entrada del spa" />
+    <h2>SOBRE NOSOTROS</h2>
+  </div>
+  <div class="texto">
+    <p>
+      En El Cielo En La Tierra creemos que el bienestar no es un lujo, sino una
+      necesidad. Somos un spa dedicado a ofrecer experiencias de relajación y
+      cuidado personal que renuevan cuerpo, mente y espíritu.
+    </p>
+    <p>
+      Desde nuestra creación, nos propusimos ser un refugio de paz en medio del
+      ritmo acelerado de la vida diaria. Cada rincón de nuestro espacio fue
+      diseñado para invitar al descanso, con una atmósfera cálida, aromas suaves
+      y una atención enfocada en los detalles.
+    </p>
+    <p>
+      Ofrecemos una variedad de terapias y tratamientos personalizados —desde
+      masajes relajantes hasta rituales de spa completos— brindados por
+      profesionales comprometidos con tu bienestar.
+    </p>
+    <p>
+      Nuestro nombre lo dice todo: queremos que cada visita se sienta como un
+      pedacito de cielo en la tierra.
+    </p>
+    <p>
+      Te esperamos para que desconectes, respires profundo y te regales ese
+      momento que tanto merecés.
+    </p>
+  </div>
+</main>
+
+{% endblock %}

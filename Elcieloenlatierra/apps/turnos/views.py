@@ -2,7 +2,9 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.conf import settings
 from .forms import TurnoForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def solicitud_turno(request):
     enviado = False
     if request.method == 'POST':
@@ -14,6 +16,7 @@ def solicitud_turno(request):
             print(f"Correo: {datos['email']}")
             print(f"Teléfono: {datos['telefono']}")
             print(f"Fecha: {datos['fecha']}")
+            print(f"Horario: {datos['horario']}")
             print(f"Servicio: {datos['servicio']}")
             print(f"Comentarios: {datos['comentarios']}")
             print("✅ Fin del mensaje.\n")

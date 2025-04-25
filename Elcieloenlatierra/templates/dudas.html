@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dudas.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="faq-section">
+  <div class="faq-header">
+    <h1>Preguntas Frecuentes</h1>
+    <p>Encuentra las respuestas a las dudas más comunes sobre nuestro spa.</p>
+  </div>
+
+  <div class="faq-container">
+    <details class="faq-item">
+      <summary class="faq-question">¿Qué tipo de tratamientos ofrece el spa?</summary>
+      <p class="faq-answer">En nuestro spa ofrecemos una amplia gama de servicios diseñados para tu relajación y bienestar. Contamos con masajes relajantes y terapéuticos para aliviar tensiones, tratamientos faciales personalizados para cada tipo de piel, y terapias corporales que hidratan y revitalizan. Además, ofrecemos clases de yoga y meditación para cuidar también tu bienestar mental, así como manicura, pedicura y otros servicios estéticos. Queremos asegurarnos de que salgas de aquí completamente renovado.</p>
+    </details>
+    
+    <details class="faq-item">
+      <summary class="faq-question">¿Es necesario reservar con anticipación?</summary>
+      <p class="faq-answer">Recomendamos reservar con anticipación para garantizar disponibilidad en el horario que prefieras, especialmente durante fines de semana o en épocas de mayor demanda. Las reservas se pueden hacer fácilmente a través de nuestro sitio web o contactándonos por WhatsApp. Aunque también aceptamos visitas sin cita, no podemos garantizar espacio inmediato en esos casos.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">¿Qué debo llevar para mi cita?</summary>
+      <p class="faq-answer">No necesitas traer nada especial. Para los tratamientos generales, proporcionamos todo lo necesario, como batas, toallas y productos. Si vienes a una clase de yoga o pilates, te sugerimos ropa cómoda que permita moverte con libertad. También tenemos áreas de vestidor y lockers disponibles para tu comodidad.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">¿Los productos son naturales?</summary>
+      <p class="faq-answer">¡Claro que sí! En nuestro spa priorizamos el uso de productos naturales y ecológicos para todos nuestros tratamientos. Creemos en el poder de la naturaleza para cuidar la piel y promover la relajación. Nuestros aceites esenciales, cremas y mascarillas están formulados con ingredientes orgánicos, libres de químicos agresivos, para garantizar que tengas una experiencia saludable y respetuosa con el medio ambiente.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">¿Puedo cancelar o reprogramar mi cita?</summary>
+      <p class="faq-answer">Entendemos que pueden surgir imprevistos. Por eso, ofrecemos la opción de cancelar o reprogramar tu cita sin penalización siempre que nos avises con al menos 24 horas de anticipación. En casos de cancelaciones de último minuto, intentaremos ayudarte en lo posible, aunque no siempre podemos garantizar reembolsos o disponibilidad inmediata para reprogramar.</p>
+    </details>
+  </div>
+</section>
+{% endblock %}
+
+
+
+
+

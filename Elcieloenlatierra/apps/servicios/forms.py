@@ -4,4 +4,4 @@ from .models import Servicio
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
-        fields = ['titulo', 'descripcion', 'precio', 'imagen']
+        fields = ['titulo', 'descripcion', 'precio', 'imagen', 'periodo']

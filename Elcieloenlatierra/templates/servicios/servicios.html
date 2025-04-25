@@ -15,8 +15,24 @@
     <h2>SERVICIOS</h2>
   </section>
 
-
   <div class="container-servicios">
+
+    {% for servicio in servicios %}
+    <div class="container-card card">
+      <input type="checkbox">
+      <div class="switch">+</div>
+      <div class="imgBg">
+        <img src="{{ servicio.imagen.url }}" alt="{{ servicio.titulo }}">
+      </div>
+      <div class="content">
+        <h1>{{ servicio.titulo }}</h1>
+        <p>{{ servicio.descripcion }}</p>
+        <div class="button-static button-left">{{ servicio.precio }}$</div>
+        <div class="button-static button-right">{{ servicio.periodo }}</div>
+      </div>
+    </div>
+    {% endfor %}
+
     <div class="container-card card">
       <input type="checkbox">
       <div class="switch">+</div>

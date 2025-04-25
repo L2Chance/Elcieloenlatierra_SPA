@@ -59,3 +59,58 @@ ul li .boton:hover {
   color: #ffffff;
   transform: scale(1.05);
 }
+
+/*Menu desplegable*/
+
+.dropdown {
+  position: relative;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  z-index: 1001;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+.dropdown-content a {
+  padding: 10px 12px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button {
+  padding: 10px 12px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background-color: #f0f0f0;
+}
+
+.menu-navbar li.dropdown:hover {
+  transform: none;
+}
