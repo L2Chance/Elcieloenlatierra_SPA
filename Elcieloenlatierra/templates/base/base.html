@@ -45,6 +45,8 @@ de la base.
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SWEET ALERT -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet" />
     <script src="{% static 'js/alert_exito.js' %}"></script>
+    <script src="{% static 'js/alert_exito_redireccion.js' %}"></script>
+    <script src="{% static 'js/alert_eliminar.js' %}"></script>
 
 
     {% block extra_css %}{% endblock %}
@@ -56,6 +58,7 @@ de la base.
 
     {% include "base/footer.html" %}
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"

@@ -1,61 +1,18 @@
-.section-one{
-    display: flex;
-    justify-content: center;
+.section-one {
     margin-top: 3rem;
     margin-bottom: 3rem;
-    gap: 0.5rem;
 }
 
-.turnos-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 3rem;
-    background-color: #006A71;
-    overflow: hidden;
-    margin-left: 1rem;
+.swiper-slide{
+    width: auto !important;
+    padding: 1rem !important;
 }
 
-
-.turnos-visual img {
-    max-width: 100%;        
-    max-height: 1200px;      
-    width: auto;             
-    height: auto;            
-    display: block;
-    border-radius: 10px;
-    filter: brightness(60%);
-    z-index: 1;
-    object-fit: contain; 
+.swiper-pagination {
+    position: relative !important;
+    margin-top: 2rem; 
 }
 
-.turnos-visual h2 {
-    position: absolute;
-    color: white;
-    font-size: 2rem;
-    font-family: 'Lexend', sans-serif;
-    font-weight: 800;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    z-index: 2; /* Asegura que el h2 quede encima de la imagen */
-}
-
-.container-servicios {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 3rem;
-    background-color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Botones estáticos con estilo de las cards */
 .button-static {
     position: absolute;
     bottom: 10px;
@@ -67,44 +24,41 @@
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
-    border-radius: 1.5rem; /* Bordes redondeados similares a las cards */
-    background-color: #131419; /* Fondo oscuro como las cards avanzadas */
+    border-radius: 1.5rem;
+    background-color: #131419; 
     color: white;
-    pointer-events: none; /* Hace el botón no interactuable */
+    pointer-events: none; 
     box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.1),
-                2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+                2px 2px 5px rgba(0, 0, 0, 0.3); 
     transition: transform 0.3s, background-color 0.3s;
 }
 
-/* Hover para dar efecto dinámico (aunque no es interactuable) */
 .container-card:hover .button-static {
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño en hover */
-    background-color: #03a9f4; /* Cambia el color de fondo en hover */
+    transform: scale(1.05); 
+    background-color: #03a9f4; 
 }
-/* Botón en la esquina inferior izquierda */
+
 .button-left {
     left: 10px;
 }
 
-/* Botón en la esquina inferior derecha */
+
 .button-right {
     right: 10px;
 }
 
-
-/* Nueva sección para las cards avanzadas */
 .card {
     position: relative;
-    width: 320px; 
+    width: 350px; 
     height: 400px; 
     background-color: #131419;
     overflow: hidden;
     box-shadow: -5px -5px 10px rgba(255,255,255,0.05),
                 5px 5px 15px rgba(0,0,0,0.5);
     border-radius: 2rem; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo del checkbox y botón switch */
 .card input,
 .card .switch {
     position: absolute;
@@ -138,7 +92,7 @@
     transform: rotate(225deg);
 }
 
-/* Estilos de la imagen */
+
 .card img {
     width: 100%; 
     height: 100%; 
@@ -146,7 +100,7 @@
     object-fit: cover; 
 }
 
-/* Fondo de imagen y contenido */
+
 .card .imgBg,
 .card .content {
     position: absolute;
@@ -180,4 +134,77 @@
     font-size: 14px; 
     font-family: 'Cabin', sans-serif;
     line-height: 20px; 
+}
+
+.boton-modificar-servicio {
+margin-top: 1rem;
+position: relative !important; 
+z-index: 1000 !important;
+background-color: #0b6e75;
+color: white;
+padding: 0.8rem;
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+  
+.boton-modificar-servicio:hover {
+background-color: #084e54;
+transform: scale(1.05);
+}
+
+.boton-eliminar-servicio{
+    margin-top: 1rem;
+    position: relative !important; 
+    z-index: 1000 !important;
+    background-color: #0b6e75;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+  
+.boton-eliminar-servicio:hover {
+    background-color: red;
+    transform: scale(1.05);
+    }
+
+.containerMas{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px; 
+    height: 400px; 
+    background-color: rgb(221, 221, 221);
+    overflow: hidden;
+    box-shadow: -5px -5px 10px rgba(255,255,255,0.05),
+                5px 5px 15px rgba(0,0,0,0.5);
+    border-radius: 2rem; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.containerMas a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containerMas a h2{
+    color: #48A6A7;
+    font-family: "Lexend", sans-serif;
+    font-weight: 800;
+    margin-top: 1rem;
+}
+
+.containerMas a img{
+    width: 180px;
+    height: auto;
 }
