@@ -58,6 +58,8 @@ ROOT_URLCONF = 'Elcieloenlatierra.urls'
 
 STATIC_URL = '/static/' #Esta linea le indica a django cuál es la carpeta de los recursos estáticos. 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
