@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-828bm&4se(ljgr^bnm%v7-2^(isr!yg508np&v+ydh68lso!)*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['elcieloenlatierraspa.onrender.com']
+ALLOWED_HOSTS = ['elcieloenlatierra-spa.onrender.com', 'localhost', '127.0.0.1']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/home'
