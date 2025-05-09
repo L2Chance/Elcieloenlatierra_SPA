@@ -1,33 +1,110 @@
-{% extends "base/base.html" %} 
-
-{% load static %} 
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/turno.css' %}" />
-{% endblock %} 
-
-{% block content %}
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/styleContacto.css' %}" />
+{% endblock %} {% block content %}
 
 <div class="turnos-container">
-  <section class="turnos-visual">
-    <img src="/static/img/adorno-one.jpg" alt="TURNOS" />
-    <h2>CONTACTO</h2>
-  </section>
-
   <section class="formulario-section">
-    <h2>Contacto</h2>
-    <form method="POST" enctype="multipart/form-data">
+    <div class="formulario-contacto">
+      <h2>Contáctanos</h2>
+      <p>
+        Por favor, completa tu información y nos pondremos en contacto contigo.
+      </p>
+      <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
+
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            placeholder="Ingresa tu nombre"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="apellido">Apellido:</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            placeholder="Ingresa tu apellido"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            placeholder="Ingresa tu teléfono"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo Electrónico:</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="Ingresa tu correo electrónico"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="motivo">Motivo:</label>
+          <input
+            type="text"
+            id="motivo"
+            name="motivo"
+            placeholder="Describe el motivo de tu consulta"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="comentarios">Comentarios:</label>
+          <textarea
+            id="comentarios"
+            name="comentarios"
+            rows="5"
+            placeholder="Escribe tus comentarios"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Enviar</button>
+      </form>
+    </div>
   </section>
 </div>
 
 {% if enviado %}
 <script>
-  mostrarAlertaExitosa('¡Mensaje enviado!', 'Tu formulario fue enviado correctamente.');
-</script>
-{% endif %}
+  if (!window.mensajeMostrado) {
+    window.mensajeMostrado = true;
 
-{% endblock %}
+    const datosFormulario = {
+      nombre: "{{ datos.nombre|default:'' }}",
+      apellido: "{{ datos.apellido|default:'' }}",
+      telefono: "{{ datos.telefono|default:'' }}",
+      correo: "{{ datos.correo|default:'' }}",
+      motivo: "{{ datos.motivo|default:'' }}",
+      comentarios: "{{ datos.comentarios|default:'' }}",
+    };
+
+    const mensaje = `
+      <strong>¡Mensaje enviado!</strong><br><br>
+      <div style="text-align: center;">
+        <p><strong>Nombre:</strong> ${datosFormulario.nombre}</p>
+        <p><strong>Apellido:</strong> ${datosFormulario.apellido}</p>
+        <p><strong>Teléfono:</strong> ${datosFormulario.telefono}</p>
+        <p><strong>Correo:</strong> ${datosFormulario.correo}</p>
+        <p><strong>Motivo:</strong> ${datosFormulario.motivo}</p>
+        <p><strong>Comentarios:</strong> ${datosFormulario.comentarios}</p>
+      </div>
+    `;
+
+    mostrarAlertaExitosaContacto("¡Mensaje enviado!", mensaje);
+  }
+</script>
+{% endif %} {% endblock %}

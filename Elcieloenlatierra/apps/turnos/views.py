@@ -11,15 +11,31 @@ def solicitud_turno(request):
         form = TurnoForm(request.POST)
         if form.is_valid():
             datos = form.cleaned_data
-            print("📅 Solicitud de turno recibida:")
-            print(f"Nombre: {datos['nombre']}")
-            print(f"Correo: {datos['email']}")
-            print(f"Teléfono: {datos['telefono']}")
-            print(f"Fecha: {datos['fecha']}")
-            print(f"Horario: {datos['horario']}")
-            print(f"Servicio: {datos['servicio']}")
-            print(f"Comentarios: {datos['comentarios']}")
-            print("✅ Fin del mensaje.\n")
+
+            asunto = "Nueva solicitud de turno"
+            mensaje = (
+                f"📅 Solicitud de turno recibida:\n\n"
+                f"Nombre: {datos['nombre']}\n"
+                f"Correo: {datos['email']}\n"
+                f"Teléfono: {datos['telefono']}\n"
+                f"Fecha: {datos['fecha']}\n"
+                f"Horario: {datos['horario']}\n"
+                f"Servicio: {datos['servicio']}\n"
+                f"Comentarios: {datos['comentarios']}\n\n"
+                f"✅ Fin del mensaje."
+            )
+
+            destinatarios = ['elcieloenlatierraspa@gmail.com']  
+
+     
+            send_mail(
+                asunto,
+                mensaje,
+                settings.DEFAULT_FROM_EMAIL,
+                destinatarios,
+                fail_silently=False,
+            )
+
             enviado = True
             form = TurnoForm()
     else:
