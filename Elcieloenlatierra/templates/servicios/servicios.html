@@ -1,104 +1,70 @@
 {% extends "base/base.html" %} {% load static %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/servicios.css' %}" />
+<link rel="stylesheet" href="{% static 'css/listarServicios.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
 {% endblock %} {% block content %}
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <div
   id="csrf-token-container"
   style="display: none"
   data-csrf-token="{{ csrf_token }}"
 ></div>
 
-<section class="section-one swiper">
-  <div class="swiper-wrapper">
-    {% for servicio in servicios %} {% if forloop.first and user.is_superuser %}
-    <div class="swiper-slide">
-      <div class="containerMas">
-        <a href="{% url 'crear_servicio' %}" class="boton-agregar">
-          <img src="/static/img/SignoMas.png" alt="Agregar-servicio" />
-          <h2>Agregar Servicio</h2>
-        </a>
-      </div>
-    </div>
-    {% endif %}
+<section class="contenedorServicios">
+  <!-- Este contenedor es el que tiene la imagen del "+" que se usa para agregar un nuevo servicio-->
 
-    <div class="swiper-slide">
-      <div class="container-card card">
-        <input type="checkbox" />
-        <div class="switch">+</div>
-        <div class="imgBg">
-          <img src="{{ servicio.imagen.url }}" alt="{{ servicio.titulo }}" />
-        </div>
-        <div class="content">
-          <h1>{{ servicio.titulo }}</h1>
-          <p>{{ servicio.descripcion }}</p>
-          <div class="button-static button-left">{{ servicio.precio }}$</div>
-          <div class="button-static button-right">{{ servicio.periodo }}</div>
-        </div>
-      </div>
-      {% if user.is_superuser %}
-      <button
-        class="boton-modificar-servicio"
-        data-servicio-id="{{ servicio.id }}"
-      >
-        Modificar servicio
-      </button>
-      <button
-        class="boton-eliminar-servicio"
-        data-servicio-id="{{ servicio.id }}"
-        data-servicio-titulo="{{ servicio.titulo }}"
-      >
-        Eliminar
-      </button>
-      {% endif %}
-    </div>
-    {% endfor %}
+  <div class="containerMas">
+    <a href="{% url 'crear_servicio' %}" class="boton-agregar">
+      <img src="/static/img/SignoMas.png" alt="Agregar-servicio" />
+      <h2>Agregar Servicio</h2>
+    </a>
   </div>
-  <div class="swiper-pagination"></div>
 
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <!-- Acá listamos los servicios en las cards -->
+
+  {% for servicio in servicios %}
+
+  <div class="contenedorServicios">
+    <div class="container-card card">
+      <input type="checkbox" />
+      <div class="switch">+</div>
+      <div class="imgBg">
+        <img src="{{ servicio.imagen.url }}" alt="{{ servicio.titulo }}" />
+      </div>
+      <div class="content">
+        <h1>{{ servicio.titulo }}</h1>
+        <p>{{ servicio.descripcion }}</p>
+        <div class="button-static button-left">{{ servicio.precio }}$</div>
+        <div class="button-static button-right">{{ servicio.periodo }}</div>
+      </div>
+    </div>
+
+    <!-- Si el usuario es adminstrador, hacemos que aparezcan los botones de elminar o modificar servicio-->
+
+    {% if user.is_superuser %}
+
+    <button
+      class="boton-modificar-servicio"
+      data-servicio-id="{{ servicio.id }}"
+    >
+      Modificar servicio
+    </button>
+
+    <button
+      class="boton-eliminar-servicio"
+      data-servicio-id="{{ servicio.id }}"
+      data-servicio-titulo="{{ servicio.titulo }}"
+    >
+      Eliminar
+    </button>
+
+    {% endif %}
+  </div>
+
+  {% endfor %}
 </section>
-
-<script>
-  const swiper = new Swiper(".swiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    coverflowEffect: {
-      rotate: 50, // cuánto giran los slides
-      stretch: 0, // distancia entre slides
-      depth: 100, // profundidad
-      modifier: 1, // efecto de intensidad
-      slideShadows: false, // sombras en los slides
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
-
-  const botonesModificar = document.querySelectorAll(
-    ".boton-modificar-servicio"
-  );
-
-  botonesModificar.forEach((boton) => {
-    boton.addEventListener("click", function () {
-      const servicioId = this.dataset.servicioId;
-      window.location.href = `/servicios/modificar/${servicioId}/`;
-    });
-  });
-</script>
 
 <script>
   confirmarEliminarServicio();

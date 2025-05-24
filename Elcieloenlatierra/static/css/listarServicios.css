@@ -3,16 +3,6 @@
   margin-bottom: 3rem;
 }
 
-.swiper-slide {
-  width: auto !important;
-  padding: 1rem !important;
-}
-
-.swiper-pagination {
-  position: relative !important;
-  margin-top: 2rem;
-}
-
 .button-static {
   position: absolute;
   bottom: 10px;

@@ -2,6 +2,10 @@
 @import "tailwindcss-animated";
 
 :root {
+  --violeta: #4635b1;
+  --lila: #b771e5;
+  --verde: #aeea94;
+  --amarillo: #fffbca;
 }
 
 * {
