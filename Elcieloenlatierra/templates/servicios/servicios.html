@@ -40,7 +40,7 @@
           <div class="button-static button-right">{{ servicio.periodo }}</div>
         </div>
       </div>
-      {% if forloop.first and user.is_superuser %}
+      {% if user.is_superuser %}
       <button
         class="boton-modificar-servicio"
         data-servicio-id="{{ servicio.id }}"

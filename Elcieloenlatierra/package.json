@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "tailwindcss": "^4.1.7",
+    "tailwindcss-animated": "^2.0.0"
+  },
+  "scripts": {
+    "watch:css": "npx @tailwindcss/cli -i ./static/css/base.css -o ./static/css/estilosTailwind.css --watch"
+  }
+}

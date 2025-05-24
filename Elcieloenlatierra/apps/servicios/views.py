@@ -24,7 +24,7 @@ def crear_servicio(request):
         if form.is_valid():
             form.save()
             exito = True  
-            return redirect('/home')  
+            return redirect('listar_servicios')  
     else:
         form = ServicioForm()
     

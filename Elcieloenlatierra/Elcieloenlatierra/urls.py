@@ -30,7 +30,6 @@ urlpatterns = [
 
 ]
 
-
 """Esta configuración es para arreglar un bug al usar la carpeta Media"""
 
 if settings.DEBUG:
