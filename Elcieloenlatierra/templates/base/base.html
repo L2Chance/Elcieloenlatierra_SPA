@@ -69,5 +69,11 @@ de la base.
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function toggleMenu() {
+        document.getElementById("menuNavbar").classList.toggle("show");
+      }
+    </script>
+    {% load django_browser_reload %} {% django_browser_reload_script %}
   </body>
 </html>

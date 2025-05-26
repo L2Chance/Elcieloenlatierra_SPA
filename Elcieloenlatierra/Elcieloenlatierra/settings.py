@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'apps.contacto',
     'cloudinary',
     'cloudinary_storage',
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'Elcieloenlatierra.urls'
