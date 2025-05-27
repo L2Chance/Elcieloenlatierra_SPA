@@ -1,75 +1,51 @@
-{% extends "base/base.html" %} 
-
-{% load static %} 
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/turno.css' %}" />
-{% endblock %} 
-
-{% block content %}
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+/>
+{% endblock %} {% block content %}
 
 <div class="turnos-container">
-  <section class="turnos-visual">
-    <img src="/static/img/adorno-one.jpg" alt="TURNOS" />
-    <h2>TURNOS</h2>
-  </section>
-
   <section class="formulario-section">
-    <h2>Solicita tu turno</h2>
+    <h2>Solicitá tu turno</h2>
+
     <form method="post">
       {% csrf_token %}
-      
-      <div>
-          {{ form.nombre.label_tag }}
-          {{ form.nombre }}
-          {{ form.nombre.errors }}
+
+      <div class="mb-3">{{ form.servicio.label_tag }} {{ form.servicio }}</div>
+
+      <div class="mb-3">
+        {{ form.cliente_nombre.label_tag }} {{ form.cliente_nombre }}
       </div>
-  
-      <div>
-          {{ form.email.label_tag }}
-          {{ form.email }}
-          {{ form.email.errors }}
-      </div>
-  
-      <div>
-          {{ form.telefono.label_tag }}
-          {{ form.telefono }}
-          {{ form.telefono.errors }}
-      </div>
-  
-      <div>
-          {{ form.fecha.label_tag }}
-          {{ form.fecha }}
-          {{ form.fecha.errors }}
-      </div>
-  
-      <div>
-          {{ form.horario.label_tag }}
-          {{ form.horario }}
-          {{ form.horario.errors }}
-      </div>
-  
-      <div>
-          {{ form.servicio.label_tag }}
-          {{ form.servicio }}
-          {{ form.servicio.errors }}
-      </div>
-  
-      <div>
-          {{ form.comentarios.label_tag }}
-          {{ form.comentarios }}
-          {{ form.comentarios.errors }}
-      </div>
-  
-      <button type="submit">Enviar turno</button>
-  </form>
+
+      <div class="mb-3">{{ form.telefono.label_tag }} {{ form.telefono }}</div>
+
+      <div class="mb-3">{{ form.email.label_tag }} {{ form.email }}</div>
+
+      <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }}</div>
+
+      <div class="mb-3">{{ form.notas.label_tag }} {{ form.notas }}</div>
+
+      <button type="submit" class="btn btn-primary">Reservar turno</button>
+    </form>
   </section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+  flatpickr(".flatpickr", {
+    dateFormat: "Y-m-d",
+    minDate: "today",
+  });
+</script>
+
 {% if enviado %}
 <script>
-  mostrarAlertaExitosa('¡Turno registrado con exito!', 'Tu formulario fue enviado correctamente.');
+  mostrarAlertaExitosa(
+    "¡Turno registrado con exito!",
+    "Tu formulario fue enviado correctamente."
+  );
 </script>
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

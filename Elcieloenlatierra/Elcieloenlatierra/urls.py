@@ -25,6 +25,7 @@ urlpatterns = [
     path('PreguntasFrecuentes', views.mostrar_preguntas_frecuentes),
     path('', include('apps.turnos.urls')), 
     path('', include('apps.usuarios.urls')),
+    path('', include('apps.perfil.urls')),
     path('servicios/', include('apps.servicios.urls')),
     path('contacto/', include('apps.contacto.urls')),
     path("__reload__/", include("django_browser_reload.urls")),

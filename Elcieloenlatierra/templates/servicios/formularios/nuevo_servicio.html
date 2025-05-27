@@ -1,12 +1,10 @@
-{% extends "base/base.html" %} 
-
-{% load static %} 
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/turno.css' %}" />
-{% endblock %} 
-
-{% block content %}
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+/>
+{% endblock %} {% block content %}
 
 <div class="turnos-container">
   <section class="turnos-visual">
@@ -17,18 +15,29 @@
   <section class="formulario-section">
     <h2>Nuevo servicio</h2>
     <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Guardar</button>
     </form>
   </section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+  // Aquí seleccionás el input donde querés aplicar flatpickr
+  flatpickr("input[name='hora']", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+  });
+</script>
+
 {% if enviado %}
 <script>
-  mostrarAlertaExitosa('Servicio Añadido!', 'Tu Servicio se ha creado correctamente.');
+  mostrarAlertaExitosa(
+    "Servicio Añadido!",
+    "Tu Servicio se ha creado correctamente."
+  );
 </script>
-{% endif %}
-
-
-{% endblock %}
+{% endif %} {% endblock %}

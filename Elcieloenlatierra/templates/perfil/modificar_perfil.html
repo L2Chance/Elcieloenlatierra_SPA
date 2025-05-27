@@ -1,0 +1,29 @@
+{% extends "base/base.html" %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <h2>Modificar Perfil</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label>Imagen actual:</label><br />
+      <img
+        src="{{ form.instance.foto_perfil.url }}"
+        alt="Foto de perfil"
+        style="max-width: 200px; max-height: 200px"
+      />
+    </div>
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="mb-3">{{ form.nombre.label_tag }} {{ form.nombre }}</div>
+
+    <div class="mb-3">{{ form.apellido.label_tag }} {{ form.apellido }}</div>
+
+    <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
+
+    <div class="mb-3">
+      {{ form.foto_perfil.label_tag }} {{ form.foto_perfil }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  </form>
+</div>
+{% endblock %}

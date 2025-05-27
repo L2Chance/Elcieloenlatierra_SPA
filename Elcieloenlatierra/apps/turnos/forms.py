@@ -1,26 +1,16 @@
 from django import forms
-from apps.servicios.models import Servicio 
+from apps.servicios.models import Servicio
+from .models import Turno
 
-from datetime import time, timedelta, datetime
-
-def generar_horarios():
-    horarios = []
-    hora_actual = datetime.strptime("07:00", "%H:%M")
-    fin = datetime.strptime("21:00", "%H:%M")
-    while hora_actual <= fin:
-        hora_str = hora_actual.strftime("%H:%M")
-        horarios.append((hora_str, hora_str))
-        hora_actual += timedelta(minutes=30)
-    return horarios
-
-class TurnoForm(forms.Form):
-    nombre = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    telefono = forms.CharField(max_length=20)
-    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    horario = forms.ChoiceField(choices=generar_horarios(), label="Horario")
-    servicio = forms.ModelChoiceField(
-        queryset=Servicio.objects.all(),
-        empty_label="Seleccioná un servicio"
-    )
-    comentarios = forms.CharField(widget=forms.Textarea, required=False)
+class TurnoForm(forms.ModelForm):
+    class Meta:
+        model = Turno
+        fields = ['servicio', 'cliente_nombre', 'telefono', 'email', 'fecha', 'notas']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'class': 'form-control flatpickr', 'autocomplete': 'off'}),
+            'cliente_nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'notas': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'servicio': forms.Select(attrs={'class': 'form-select'}),
+        }
