@@ -3,7 +3,7 @@
 .barra-footer {
   width: 100%;
   height: 250px;
-  background-color: #006a71;
+  background: linear-gradient(to right, #134e5e, #71b280);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -28,17 +28,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
-  border-left: 0.5rem solid #9acbd0;
+  border-left: 0.5rem solid var(--amarillo);
   font-family: "Lexend", sans-serif;
   font-weight: 600;
   color: #f2efe7;
   gap: 1rem;
-}
-
-.fragmento-segundo h4 {
-  font-family: "Lexend", sans-serif;
-  font-weight: 600;
-  margin-left: 1rem;
 }
 
 .fragmento-tercero {
@@ -48,8 +42,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-left: 0.5rem solid #9acbd0;
-  font-family: "Poetsen One", cursive;
+  border-left: 0.5rem solid var(--amarillo);
+  font-family: "Lobster", cursive;
   font-weight: 600;
   color: #f2efe7;
 }
@@ -66,27 +60,57 @@
 }
 
 .contacto-lista {
-  display: flex;
-  flex-direction: column;
   list-style: none;
-  font-size: 12px;
-  padding: 0;
-  margin-left: 1rem;
-  gap: 1rem;
+  padding: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
-
+.contacto-lista h4 {
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  margin-left: 1rem;
+  margin-bottom: 10px;
+}
 .contacto-lista li {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
-.contacto-lista li img {
-  width: 2rem;
-  height: auto;
-  margin-right: 1rem;
+.contacto-lista span {
+  color: #f2efe7; /* Texto oscuro para contraste */
 }
 
-.redes-sociales-lista li img {
+.contacto-icono {
+  border: 4px solid #f2efe7; /* Borde beige claro */
+  border-radius: 12px;
+  padding: 3px;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.contacto-icono svg {
+  width: 100%;
+  height: 100%;
+}
+
+.telefono-icono path {
+  fill: #f2efe7;
+}
+
+.correo-icono path {
+  stroke: #f2efe7;
+}
+
+.ubicacion-icono path {
+  stroke: #f2efe7;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+.redes-sociales-lista li svg {
   width: 3rem;
   height: auto;
 }
@@ -98,4 +122,28 @@
 .red-social-icono:hover {
   transform: scale(1.2);
   filter: brightness(1.3) drop-shadow(0 0 5px #fff);
+}
+
+.twitter-icono {
+  border: 4px solid #f2efe7;
+  border-radius: 12px; /* opcional, para redondear */
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+}
+.instagram-icono {
+  color: #f2efe7;
+  border-radius: 12px; /* opcional, para redondear */
+  margin-right: 3px;
+  width: 40px;
+  height: 40px;
+}
+
+.facebook-icono {
+  border: 4px solid #f2efe7;
+  border-radius: 12px; /* opcional, para redondear */
+  padding: 3px;
+  width: 40px;
+  height: 40px;
+  margin-right: 3px;
 }

@@ -3,7 +3,7 @@
 .barra {
   width: 100%;
   height: 150px;
-  background-color: #006a71;
+  background: linear-gradient(to right, #134e5e, #71b280);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -17,10 +17,12 @@
   width: auto;
 }
 
-.imagen-titulo {
-  height: 40px;
-  width: auto;
-  margin-left: 0.5rem;
+.texto-logo {
+  color: whitesmoke;
+  font-family: "Lobster", cursive;
+  font-weight: 800;
+  font-size: 40px;
+  margin-left: 1rem;
 }
 
 .navbar {
@@ -32,7 +34,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #006a71;
+  background-color: var(--violeta);
   list-style: none;
   padding: 1rem;
   margin: 0;
