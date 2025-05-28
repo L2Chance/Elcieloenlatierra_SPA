@@ -1,16 +1,42 @@
 from django import forms
-from apps.servicios.models import Servicio
 from .models import Turno
+import datetime
+
+# Horarios disponibles por turno
+HORARIOS = {
+    'manana': [(datetime.time(h, 0), f'{h:02d}:00') for h in range(7, 12)],
+    'tarde': [(datetime.time(h, 0), f'{h:02d}:00') for h in range(14, 19)],
+    'noche': [(datetime.time(h, 0), f'{h:02d}:00') for h in range(19, 22)],
+}
 
 class TurnoForm(forms.ModelForm):
     class Meta:
         model = Turno
-        fields = ['servicio', 'cliente_nombre', 'telefono', 'email', 'fecha', 'notas']
+        fields = ['servicio', 'fecha', 'turno', 'hora', 'notas']
         widgets = {
-            'fecha': forms.DateInput(attrs={'class': 'form-control flatpickr', 'autocomplete': 'off'}),
-            'cliente_nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'notas': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'servicio': forms.Select(attrs={'class': 'form-select'}),
+            'fecha': forms.DateInput(attrs={
+                'class': 'form-control flatpickr',
+                'autocomplete': 'off'
+            }),
+            'turno': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'turno-select'
+            }),
+            'hora': forms.Select(attrs={
+                'class': 'form-select',
+                'id': 'hora-select'
+            }),
+            'notas': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+            }),
+            'servicio': forms.Select(attrs={
+                'class': 'form-select'
+            }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Por defecto, mostrar las horas del turno mañana
+        self.fields['hora'].choices = HORARIOS['manana']

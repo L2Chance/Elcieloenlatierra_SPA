@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.servicios',
     'apps.contacto',
     'apps.perfil',
+    'apps.profesional',
     'cloudinary',
     'cloudinary_storage',
     "django_browser_reload",

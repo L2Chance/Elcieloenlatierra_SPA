@@ -1,12 +1,6 @@
-{% extends "base/base.html" %} 
-
-{% load static %} 
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/turno.css' %}" />
-{% endblock %} 
-
-{% block content %}
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+{% endblock %} {% block content %}
 
 <div class="turnos-container">
   <section class="turnos-visual">
@@ -17,9 +11,8 @@
   <section class="formulario-section">
     <h2>Registrarse</h2>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Registrarse</button>
     </form>
   </section>
 </div>

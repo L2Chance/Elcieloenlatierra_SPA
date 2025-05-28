@@ -3,27 +3,50 @@
   <h2>Modificar Perfil</h2>
 
   <form method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label>Imagen actual:</label><br />
-      <img
-        src="{{ form.instance.foto_perfil.url }}"
-        alt="Foto de perfil"
-        style="max-width: 200px; max-height: 200px"
-      />
-    </div>
     {% csrf_token %} {{ form.non_field_errors }}
 
-    <div class="mb-3">{{ form.nombre.label_tag }} {{ form.nombre }}</div>
-
-    <div class="mb-3">{{ form.apellido.label_tag }} {{ form.apellido }}</div>
-
-    <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
-
-    <div class="mb-3">
-      {{ form.foto_perfil.label_tag }} {{ form.foto_perfil }}
+    <div class="mb-3 text-center">
+      <label for="id_foto_perfil" style="cursor: pointer">
+        <img
+          id="preview-foto"
+          src="{{ form.instance.foto_perfil.url|default:'https://via.placeholder.com/150' }}"
+          alt="Foto de perfil"
+          style="max-width: 200px; max-height: 200px"
+          class="img-fluid rounded-circle"
+          title="Click para cambiar la foto"
+        />
+      </label>
     </div>
+
+    <div class="mb-3" style="display: none">{{ form.foto_perfil }}</div>
+
+    <div class="mb-3">{{ form.nombre.label_tag }} {{ form.nombre }}</div>
+    <div class="mb-3">{{ form.apellido.label_tag }} {{ form.apellido }}</div>
+    <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
+    <div class="mb-3">{{ form.genero.label_tag }} {{ form.genero }}</div>
+    <div class="mb-3">{{ form.telefono.label_tag }} {{ form.telefono }}</div>
 
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
   </form>
 </div>
+
+<!-- Este Script se encarga de permitirnos cambiar dinamicamente las imagenes de perfil presionandolas -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("id_foto_perfil");
+    const preview = document.getElementById("preview-foto");
+
+    input.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
 {% endblock %}
