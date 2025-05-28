@@ -1,3 +1,0 @@
-ENTORNO/
-__pycache__/
-.env
