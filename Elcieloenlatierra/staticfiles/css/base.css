@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
 
-:root {
-}
+/* Background gradient(navbar y footer): https://uigradients.com/#Moss */
+/* Background gradient(home): background: linear-gradient(to bottom, #134e5e, #2bc0e4); */
 
 * {
   margin: 0;
