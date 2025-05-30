@@ -9,6 +9,29 @@
       <li><a href="/home">Home</a></li>
       <li><a href="/servicios/listado">Servicios</a></li>
       <li><a href="/contacto">Contacto</a></li>
+      <li>
+        {% if user.is_authenticated %}
+        <a><img src="/static/img/perfil.png" class="imagen-perfil" /></a>
+        {% else %}
+        <a> Register/Login</a>
+        {%endif%}
+        <ul class="submenu">
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}">Perfil</a></li>
+          <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+          {% else %}
+          <li>
+            <a href="/Elcieloenlatierra/templates/registration/login.html">Iniciar sesión</a>
+            </li>
+            <li>
+              <a href="/Elcieloenlatierra/templates/registration/registro.html"
+                >Registrarse</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </ul>
+      </li>
     </ul>
   </nav>
 </div>
