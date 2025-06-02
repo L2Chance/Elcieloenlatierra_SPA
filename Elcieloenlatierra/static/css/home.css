@@ -1,10 +1,18 @@
 /* Estilos generales que ya tenías (no modificados o levemente ajustados) */
-
+.section-one {
+  /* min-width: 300px;
+  max-width: 3200px; */
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
 .divisor {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 5rem;
   background: linear-gradient(to bottom, #2980b9, #2bc0e4);
   font-family: "Lexend", sans-serif;
@@ -14,6 +22,7 @@
 .divisor h2 {
   margin: 0;
   text-align: center;
+  color: White;
 }
 
 /* Sección 2 */
@@ -309,8 +318,12 @@
 }
 
 .bento-grid {
+  min-width: 300px;
+  max-width: 1300px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); */
+  grid-template-columns: repeat(5, 3fr);
   grid-auto-rows: 180px;
   gap: 1rem;
   padding: 2rem;
