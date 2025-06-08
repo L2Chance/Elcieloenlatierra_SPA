@@ -1,0 +1,80 @@
+{% extends "base/base.html" %} 
+{% load static %} 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+
+<div class="container mt-4">
+  <h2>Modificar Perfil</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="mb-3 text-center">
+      <label for="id_foto_perfil" style="cursor: pointer">
+        <img
+          id="preview-foto"
+          src="{{ form.instance.foto_perfil.url|default:'https://via.placeholder.com/150' }}"
+          alt="Foto de perfil"
+          class="img-fluid rounded-circle"
+          title="Click para cambiar la foto"
+        />
+      </label>
+    </div>
+
+    <div class="mb-3" style="display: none">{{ form.foto_perfil }}</div>
+
+    <div class="mb-3">{{ form.nombre.label_tag }} {{ form.nombre }}</div>
+    <div class="mb-3">{{ form.apellido.label_tag }} {{ form.apellido }}</div>
+    <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
+    <div class="mb-3">{{ form.genero.label_tag }} {{ form.genero }}</div>
+    <div class="mb-3">{{ form.telefono.label_tag }} {{ form.telefono }}</div>
+
+    <div class="perfil-botones">
+      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#historialModal">
+        Ver Historial de Servicios
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal de Historial -->
+<div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="historialModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="historialModalLabel">Historial de Servicios</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for servicio in historial_servicios %}
+          <p><strong>{{ servicio.fecha }}</strong>: {{ servicio.descripcion }}</p>
+        {% empty %}
+          <p>No tienes historial de servicios aún.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("id_foto_perfil");
+    const preview = document.getElementById("preview-foto");
+
+    input.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+
+{% endblock %}
+

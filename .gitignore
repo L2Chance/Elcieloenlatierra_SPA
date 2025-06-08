@@ -1,1 +1,4 @@
-ENTORNO/
+env/
+_pycache/
+*.pyc
+.env

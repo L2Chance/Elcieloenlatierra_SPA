@@ -1,0 +1,88 @@
+/* Contenedor principal */
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: linear-gradient(135deg, #2980b9, #2bc0e4);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+/* Título */
+h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+form {
+  background-color: #134e5e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de perfil */
+.mb-3.text-center {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.img-fluid {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #2bc0e4;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out;
+}
+
+.img-fluid:hover {
+  transform: scale(1.1);
+}
+
+/* Contenedor de los botones */
+.perfil-botones {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Botones */
+.btn-primary, .btn-info {
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #2980b9;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2bc0e4;
+}
+
+.btn-info {
+  background-color: #134e5e;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #2bc0e4;
+}
+
+/* Modal de historial */
+.modal-content {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
