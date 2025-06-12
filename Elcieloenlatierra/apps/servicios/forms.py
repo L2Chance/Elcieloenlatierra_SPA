@@ -1,9 +1,6 @@
 from django import forms
 from .models import Servicio
 
-from django import forms
-from .models import Servicio, TurnoHorario
-
 class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
@@ -13,12 +10,8 @@ class ServicioForm(forms.ModelForm):
             'descripcion': forms.Textarea(attrs={'class': 'form-control'}),
             'precio': forms.NumberInput(attrs={'class': 'form-control'}),
             'imagen': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'turnos': forms.CheckboxSelectMultiple(),
+            'turnos': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
         }
         help_texts = {
             'turnos': 'Selecciona en qué turnos se ofrece este servicio.',
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['turnos'].queryset = TurnoHorario.objects.all()

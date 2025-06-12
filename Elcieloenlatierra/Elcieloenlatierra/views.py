@@ -27,4 +27,7 @@ def mostrar_sobre_nosotros(request):
 def mostrar_preguntas_frecuentes(request):
     return render(request, "dudas.html")
 
+def pedir_datos_perfil(request):
+    return render(request, "navbar.html")
+
 

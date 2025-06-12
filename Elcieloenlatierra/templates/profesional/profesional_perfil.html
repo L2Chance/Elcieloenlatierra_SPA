@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/perfil-profesional.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+{% endblock %}
+
+{% block content %}
+<div class="perfil-profesional-container">
+  <h2>Perfil Profesional</h2>
+
+  <form method="get" action="">
+    <label for="fecha">Seleccionar fecha:</label>
+    <input
+      type="text"
+      id="fecha"
+      name="fecha"
+      placeholder="Seleccioná una fecha"
+      value="{{ fecha_seleccionada|date:'Y-m-d' }}"
+      autocomplete="off"
+    />
+    <button type="submit" class="btn btn-primary">Ver turnos</button>
+  </form>
+
+  <hr />
+
+  {% if turnos %}
+    <h3>Turnos para {{ fecha_seleccionada|date:"d/m/Y" }}</h3>
+    <ul class="turnos-list">
+        {% for turno in turnos %}
+        <li>
+            <strong>Cliente:</strong> {{ turno.cliente }}<br />
+            <strong>Servicio:</strong> {{ turno.servicio }}<br />
+            <strong>Turno:</strong> {{ turno.turno }}<br />
+            <strong>Hora:</strong> {{ turno.hora|time:"H:i" }}<br />
+            <strong>DNI:</strong> {{ turno.dni }}<br />
+            {% if turno.notas %}
+            <strong>Notas:</strong> {{ turno.notas }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay turnos para esta fecha.</p>
+  {% endif %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  flatpickr("#fecha", {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{ fecha_seleccionada|date:'Y-m-d' }}"
+  });
+</script>
+<script>
+  flatpickr("#fecha", {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{ fecha_seleccionada|date:'Y-m-d' }}",
+    onChange: function(selectedDates, dateStr, instance) {
+      const turnosList = document.querySelector('.turnos-list');
+      if (turnosList) {
+        turnosList.style.opacity = 0;
+        setTimeout(() => {
+          turnosList.style.opacity = 1;
+        }, 150);
+      }
+    }
+  });
+</script>
+{% endblock %}
+
+

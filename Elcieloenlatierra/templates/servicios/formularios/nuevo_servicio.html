@@ -1,5 +1,5 @@
 {% extends "base/base.html" %} {% load static %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+<link rel="stylesheet" href="{% static 'css/crear_servicio.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
@@ -7,16 +7,25 @@
 {% endblock %} {% block content %}
 
 <div class="turnos-container">
-  <section class="turnos-visual">
-    <img src="/static/img/adorno-one.jpg" alt="TURNOS" />
-    <h2>SERVICIO</h2>
-  </section>
-
   <section class="formulario-section">
     <h2>Nuevo servicio</h2>
     <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Guardar</button>
+      {% csrf_token %}
+      <p>{{ form.nombre.label_tag }} {{ form.nombre }}</p>
+      <p>{{ form.descripcion.label_tag }} {{ form.descripcion }}</p>
+      <p>{{ form.precio.label_tag }} {{ form.precio }}</p>
+      <p>{{ form.imagen.label_tag }} {{ form.imagen }}</p>
+
+      <fieldset>
+        <legend>{{ form.turnos.label }}</legend>
+        {% for checkbox in form.turnos %}
+        <div class="form-check">
+          {{ checkbox.tag }} {{ checkbox.choice_label }}
+        </div>
+        {% endfor %}
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
   </section>
 </div>

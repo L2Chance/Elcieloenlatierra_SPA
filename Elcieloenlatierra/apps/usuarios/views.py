@@ -1,8 +1,11 @@
 # cuentas/views.py
 from django.shortcuts import render, redirect
+
+from apps.perfil.models import Perfil
 from .forms import RegistroForm
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import login
 
 """Este método se encarga de no permitir el acceso al formulario de
 registro a usuarios que ya estén autenticados en la pagina"""
@@ -15,9 +18,12 @@ def registro_usuario(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save()  
+            login(request, usuario)
+            if not hasattr(usuario, 'perfil'):
+                Perfil.objects.create(user=usuario)
             messages.success(request, "Usuario registrado correctamente.")
-            return redirect('login')
+            return redirect('crear_primer_perfil')
     else:
         form = RegistroForm()
     return render(request, 'registration/registro.html', {'form': form})

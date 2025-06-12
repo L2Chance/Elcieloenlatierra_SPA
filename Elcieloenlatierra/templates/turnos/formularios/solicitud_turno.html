@@ -1,50 +1,281 @@
 {% extends "base/base.html" %} {% load static %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/turno.css' %}" />
+<link rel="stylesheet" href="{% static 'css/solicitar-turno.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
 />
 {% endblock %} {% block content %}
-
-<div class="turnos-container">
-  <section class="formulario-section">
-    <h2>Solicitá tu turno</h2>
-
-    <form method="post">
-      {% csrf_token %}
-
-      <div class="mb-3">{{ form.servicio.label_tag }} {{ form.servicio }}</div>
-
-      <div class="mb-3">
-        {{ form.cliente_nombre.label_tag }} {{ form.cliente_nombre }}
+<div class="ventana-turnos">
+  <div class="turnos-container">
+    <section class="formulario-section">
+      <h2>Solicitá tu turno</h2>
+      <div class="wrapper-agregar-servicio">
+        <a
+          class="containerMas boton-agregar"
+          aria-label="Agregar nuevo servicio"
+          id="btn-agregar-turno"
+        >
+          <div class="icono-agregar">
+            <img src="/static/img/SignoMas.png" alt="Agregar turno" />
+          </div>
+          <h2>Agregar otro turno</h2>
+        </a>
       </div>
 
-      <div class="mb-3">{{ form.telefono.label_tag }} {{ form.telefono }}</div>
+      <form method="post" id="form-turnos-multiples">
+        {% csrf_token %} {{ formset.management_form }}
 
-      <div class="mb-3">{{ form.email.label_tag }} {{ form.email }}</div>
+        <div id="formularios-turnos">
+          {% for form in formset %}
+          <div class="turno-form" data-form-index="{{ forloop.counter0 }}">
+            <div class="mb-3">
+              {{ form.servicio.label_tag }} {{ form.servicio }}
+            </div>
+            <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
+            <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }}</div>
+            <div class="mb-3">{{ form.turno.label_tag }} {{ form.turno }}</div>
+            <div class="mb-3">{{ form.hora.label_tag }} {{ form.hora }}</div>
+            <div class="mb-3">{{ form.notas.label_tag }} {{ form.notas }}</div>
 
-      <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }}</div>
+            {{ form.DELETE }}
 
-      <div class="mb-3">{{ form.notas.label_tag }} {{ form.notas }}</div>
+            <button type="button" class="btn btn-danger btn-eliminar-turno">
+              X
+            </button>
+          </div>
+          {% endfor %}
+        </div>
 
-      <button type="submit" class="btn btn-primary">Reservar turno</button>
-    </form>
-  </section>
+        <button type="submit" class="btn btn-primary">¡Reservar!</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="contenedor-tabla">
+    <h2>Reservas Recibidas</h2>
+    <table class="tabla-reservas">
+      <thead>
+        <tr>
+          <th>DNI</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Servicio</th>
+          <th>Fecha</th>
+          <th>Turno</th>
+          <th>Notas</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reserva in reservas %}
+        <tr>
+          <td>{{ reserva.usuario.perfil.dni }}</td>
+          <td>{{ reserva.usuario.perfil.primer_nombre }}</td>
+          <td>{{ reserva.usuario.perfil.apellido }}</td>
+          <td>{{ reserva.servicio.nombre }}</td>
+          <td>{{ reserva.fecha }}</td>
+          <td>{{ reserva.get_turno_display }}</td>
+          <td>{{ reserva.notas|default:"-" }}</td>
+          <td>
+            <form
+              action="{% url 'cancelar_reserva' reserva.id %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="btn-eliminar"
+                onclick="return confirm('¿Estás seguro de eliminar esta reserva?');"
+              >
+                Eliminar
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8">No hay reservas aún.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <script>
-  flatpickr(".flatpickr", {
-    dateFormat: "Y-m-d",
-    minDate: "today",
+  const horarios = {
+    mañana: ["07:00", "08:00", "09:00", "10:00", "11:00"],
+    tarde: ["14:00", "15:00", "16:00", "17:00", "18:00"],
+    noche: ["19:00", "20:00", "21:00", "22:00"],
+  };
+
+  const formulariosContainer = document.getElementById("formularios-turnos");
+  const formsetPrefix = "{{ formset.prefix }}"; // normalmente 'form'
+
+  // Función para actualizar las horas según turno seleccionado
+  function actualizarHoras(turnoSelect) {
+    const formDiv = turnoSelect.closest(".turno-form");
+    const index = formDiv.dataset.formIndex;
+
+    const horaSelect = formDiv.querySelector(
+      `[name="${formsetPrefix}-${index}-hora"]`
+    );
+
+    const turno = turnoSelect.value;
+    const opciones = horarios[turno] || [];
+
+    horaSelect.innerHTML = "";
+
+    if (opciones.length === 0) {
+      horaSelect.disabled = true;
+      return;
+    }
+    horaSelect.disabled = false;
+
+    opciones.forEach((hora) => {
+      const option = document.createElement("option");
+      option.value = hora;
+      option.textContent = hora;
+      horaSelect.appendChild(option);
+    });
+  }
+
+  // Inicializar flatpickr para todos los inputs fecha actuales
+  function inicializarFlatpickr() {
+    document.querySelectorAll(`input[name$="-fecha"]`).forEach((input) => {
+      if (!input._flatpickr) {
+        flatpickr(input, {
+          dateFormat: "Y-m-d",
+          minDate: "today",
+        });
+      }
+    });
+  }
+
+  // Función para actualizar índices y TOTAL_FORMS
+  function actualizarIndicesYTotalForms() {
+    const formularios = Array.from(
+      document.querySelectorAll(".turno-form")
+    ).filter((div) => div.style.display !== "none");
+
+    formularios.forEach((formDiv, index) => {
+      formDiv.dataset.formIndex = index;
+
+      formDiv
+        .querySelectorAll("input, select, textarea, label")
+        .forEach((elem) => {
+          if (elem.name) {
+            elem.name = elem.name.replace(/-\d+-/, `-${index}-`);
+          }
+          if (elem.id) {
+            elem.id = elem.id.replace(/_\d+_/, `_${index}_`);
+          }
+          if (elem.tagName === "LABEL" && elem.htmlFor) {
+            elem.htmlFor = elem.htmlFor.replace(/_\d+_/, `_${index}_`);
+          }
+        });
+    });
+
+    // Actualiza TOTAL_FORMS con la cantidad de formularios visibles
+    const totalFormsInput = document.querySelector(
+      `input[name="${formsetPrefix}-TOTAL_FORMS"]`
+    );
+    totalFormsInput.value = formularios.length;
+  }
+
+  // Evento delegado para cuando cambia el select turno
+  formulariosContainer.addEventListener("change", (e) => {
+    const target = e.target;
+
+    if (target.name.endsWith("-turno")) {
+      actualizarHoras(target);
+    }
+  });
+
+  // Botón para agregar nuevo formulario (clona el último y ajusta índices)
+  document.getElementById("btn-agregar-turno").addEventListener("click", () => {
+    const totalFormsInput = document.querySelector(
+      `input[name="${formsetPrefix}-TOTAL_FORMS"]`
+    );
+    let totalForms = parseInt(totalFormsInput.value);
+
+    // Clonar el último formulario (visible o no)
+    const allForms = document.querySelectorAll(".turno-form");
+    const lastForm = allForms[allForms.length - 1];
+    const newForm = lastForm.cloneNode(true);
+
+    // Reseteamos display para que se muestre
+    newForm.style.display = "";
+
+    // Limpiamos valores y checkbox DELETE
+    newForm.querySelectorAll("input, select, textarea").forEach((elem) => {
+      if (elem.name) {
+        elem.name = elem.name.replace(/-\d+-/, `-${totalForms}-`);
+      }
+      if (elem.id) {
+        elem.id = elem.id.replace(/_\d+_/, `_${totalForms}_`);
+      }
+
+      if (elem.tagName === "SELECT") {
+        elem.selectedIndex = 0;
+        elem.disabled = false;
+      } else if (elem.tagName === "INPUT") {
+        if (elem.type === "checkbox") {
+          elem.checked = false;
+        } else {
+          elem.value = "";
+          // 🔥 Evitar duplicado de flatpickr
+          if (elem._flatpickr) {
+            elem._flatpickr.destroy();
+            delete elem._flatpickr;
+          }
+        }
+      } else if (elem.tagName === "TEXTAREA") {
+        elem.value = "";
+      }
+    });
+
+    newForm.dataset.formIndex = totalForms;
+
+    formulariosContainer.appendChild(newForm);
+
+    totalFormsInput.value = totalForms + 1;
+
+    // Inicializar flatpickr en el nuevo input fecha
+    inicializarFlatpickr();
+  });
+
+  // Evento para eliminar formulario (marcar DELETE, ocultar y actualizar)
+  formulariosContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-eliminar-turno")) {
+      const formDiv = e.target.closest(".turno-form");
+      const deleteCheckbox = formDiv.querySelector(
+        `input[type="checkbox"][name$="-DELETE"]`
+      );
+
+      if (deleteCheckbox) {
+        deleteCheckbox.checked = true;
+        formDiv.style.display = "none";
+        actualizarIndicesYTotalForms();
+      }
+    }
+  });
+
+  // Inicializar todo al cargar
+  window.addEventListener("DOMContentLoaded", () => {
+    inicializarFlatpickr();
+
+    // Actualizamos indices y TOTAL_FORMS en caso de formularios ocultos al cargar
+    actualizarIndicesYTotalForms();
   });
 </script>
 
 {% if enviado %}
 <script>
   mostrarAlertaExitosa(
-    "¡Turno registrado con exito!",
+    "¡Turno registrado con éxito!",
     "Tu formulario fue enviado correctamente."
   );
 </script>

@@ -1,116 +1,160 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poetsen+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 
 .barra {
   width: 100%;
-  height: 150px;
-  background-color: #006a71;
+  height: 10rem;
+  background: linear-gradient(to right, #134e5e, #71b280);
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .imagen-logo {
-  height: 110px;
+  height: 80px;
   width: auto;
 }
 
-.imagen-titulo {
-  height: 60px;
-  width: auto;
-}
-
-.navbar {
-  margin-left: auto;
-  margin-right: 5rem;
-  color: #f2efe7;
-}
-
-.menu-navbar {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 2rem;
-}
-
-.menu-navbar li {
-  font-family: "Lexend", sans-serif;
-  font-weight: 600;
+.texto-logo {
   color: whitesmoke;
-  transition: transform 0.3s ease;
+  font-family: "Lobster", cursive;
+  font-weight: 800;
+  font-size: 40px;
+  margin: 0;
+  margin-left: 1rem;
 }
 
-.menu-navbar li:hover {
-  transform: scale(1.2);
+.enlaces {
+  display: flex;
+  margin: 0;
+  gap: 3rem;
+  margin-left: auto;
+  font-family: "Lexend", sans-serif;
+  color: white;
 }
 
-ul li .boton {
-  background-color: #d6d851;
-  color: rgb(0, 0, 0);
-  border: 1rem solid #d6d851;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.2s ease;
+.enlaces li {
+  transition: transform 300ms ease;
 }
 
-ul li .boton:hover {
-  color: #ffffff;
-  transform: scale(1.05);
+.enlaces li:hover {
+  transform: scale(1.1);
 }
 
-/*Menu desplegable*/
-
-.dropdown {
-  position: relative;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+.menu-perfil {
+  margin-left: auto;
+  margin-right: 4rem;
+  position: relative; /* importante para posicionar bien el submenu */
 }
 
-.dropdown-content {
-  display: none;
+.menu-perfil img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.submenu-perfil {
   position: absolute;
-  background-color: white;
-  min-width: 160px;
-  z-index: 1001;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  top: 100%;
+  right: 0;
+  background-color: #71b280;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 300ms ease, transform 300ms ease;
+  pointer-events: none;
+  z-index: 100;
 }
 
-.dropbtn {
-  cursor: pointer;
+.menu-perfil:hover .submenu-perfil {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
-.dropdown-content a {
-  padding: 10px 12px;
+
+.submenu-perfil li a {
   display: block;
-  color: #333;
+  padding: 10px 40px;
+  color: white;
   text-decoration: none;
+  font-family: "Lexend", sans-serif;
+  transition: background-color, font-weight 150ms ease-in-out;
 }
 
-.dropdown-content a:hover {
-  background-color: #f0f0f0;
+.submenu-perfil li a:hover {
+  background-color: #4b9e61;
+  font-weight: bold;
 }
 
-.dropdown:hover .dropdown-content {
+/* Media query para hacer responsive */
+@media (max-width: 768px) {
+  .barra {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 1rem;
+    position: relative;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .titulo {
+    display: none;
+  }
+
+  .enlaces {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-top: 3rem;
+  }
+
+  .menu-perfil {
+    margin: 0;
+  }
+
+  .menu-perfil img {
+    width: 100px;
+    height: 100px;
+    margin-top: 3rem;
+  }
+}
+
+.cerrar-sesion-btn {
+  all: unset;
   display: block;
-}
-
-.dropdown-content button {
-  padding: 10px 12px;
-  display: block;
-  color: #333;
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  justify-content: center;
+  color: white;
+  font-family: "Lexend", sans-serif;
   text-decoration: none;
-  background: none;
-  border: none;
   width: 100%;
-  text-align: left;
-  font: inherit;
   cursor: pointer;
+  transition: background-color 150ms ease-in-out, font-weight 150ms ease-in-out;
 }
 
-.dropdown-content button:hover {
-  background-color: #f0f0f0;
-}
-
-.menu-navbar li.dropdown:hover {
-  transform: none;
+.cerrar-sesion-btn:hover {
+  background-color: #eb7373;
+  color: black;
+  font-weight: bold;
 }

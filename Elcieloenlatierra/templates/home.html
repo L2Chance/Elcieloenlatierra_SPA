@@ -15,37 +15,32 @@
 <section class="section-one animate-fade-up">
   <div class="bento-grid">
     <div
-      class="bento-item large"
-      style="--bg-image: url('/static/img/adorno-one.jpg')"
-    >
-      <span class="bento-text">Pedir turno</span>
-    </div>
-    <div
-      class="bento-item"
+      class="bento-item very-wide"
       style="--bg-image: url('/static/img/adorno-two.jpg')"
     >
-      <span class="bento-text">Item 2</span>
+      <span class="bento-text">
+        ¡Bienvenido de vuelta {{ perfil_usuario.primer_nombre }}!
+      </span>
     </div>
     <div
-      class="bento-item"
+      class="bento-item very-wide"
       style="--bg-image: url('/static/img/adorno-three.jpg')"
     >
-      <span class="bento-text">Item 3</span>
+      <a href="/PreguntasFrecuentes"
+        ><span class="bento-text">Ver dudas frecuentes</span></a
+      >
     </div>
     <div
-      class="bento-item large"
-      style="--bg-image: url('/static/img/fondo4.jpg')"
+      class="bento-item very-wide"
+      style="--bg-image: url('/static/img/adorno-four.jpg')"
     >
-      <span class="bento-text">Item 4</span>
+      <a href="/perfil/detalle"><span class="bento-text">Ver mis turnos registrados</span></a>
     </div>
     <div
-      class="bento-item wide"
+      class="bento-item very-wide grid-amarillo"
       style="--bg-image: url('/static/img/fondo5.jpg')"
     >
-      <span class="bento-text">Item 5</span>
-    </div>
-    <div class="bento-item" style="--bg-image: url('/static/img/fondo6.jpg')">
-      <span class="bento-text">Item 6</span>
+      <a href="/reservar"><span class="bento-text">Solicitar reserva</span></a>
     </div>
   </div>
 </section>
@@ -54,13 +49,16 @@
   <h2>Encuentranos</h2>
 </div>
 
-<div class="section-three">
+<div class="section-three loading-lazy">
   <iframe
     id="mapFrame"
-    class="box-uniform"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.902938757285!2d-58.43708968477799!3d-34.61177838045961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf6a8b1f11%3A0x6d93b57e9a6b63b9!2sObelisco%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1695620000000!5m2!1ses!2sarhttps://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.902938757285!2d-58.43708968477799!3d-34.61177838045961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf6a8b1f11%3A0x6d93b57e9a6b63b9!2sObelisco%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1695620000000!5m2!1ses!2sar"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7081.165247200975!2d-58.988022822290006!3d-27.451115399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94450cf0c80be0d3%3A0xc9f9278c74810912!2sUTN%20-%20Facultad%20Regional%20Resistencia!5e0!3m2!1ses!2sar!4v1749441265159!5m2!1ses!2sar"
+    width="600"
+    height="450"
+    style="border: 0"
     allowfullscreen=""
     loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
   ></iframe>
 
   <div class="container-whatsapp box-uniform">
@@ -72,7 +70,7 @@
 
 <a href="#">
   <section class="section-four animate-fade-up">
-    <img src="/static/img/Prueba2.jpg" alt="Sobre nosotros" />
+    <img src="/static/img/Prueba2.jpg" alt="Sobre nosotros" loading="lazy" />
     <h2>ENTERATE MÁS SOBRE NOSOTROS</h2>
   </section>
 </a>
@@ -86,16 +84,6 @@
       class="imagen1"
     />
   </div>
-  <a href="/PreguntasFrecuentes">
-    <div class="container-simple">
-      <img
-        src="/static/img/iconos/Pregunta.png"
-        alt="Preguntas Frecuentes"
-        class="imagen2"
-      />
-      <h2>Ver dudas frecuentes</h2>
-    </div>
-  </a>
 </section>
 
 {% endblock %}

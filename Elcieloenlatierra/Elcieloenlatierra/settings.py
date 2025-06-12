@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['elcieloenlatierra-spa.onrender.com', 'localhost', '127.0.0.1']
 
@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'apps.contacto',
     'apps.perfil',
     'apps.profesional',
+    'apps.chatbot',
+    'apps.reservas',
+    'apps.profesion',
+    'apps.panel_de_control',
     'cloudinary',
     'cloudinary_storage',
     "django_browser_reload",
@@ -95,6 +99,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.perfil.context_processors.perfil_usuario',
             ],
         },
     },

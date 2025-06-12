@@ -1,0 +1,160 @@
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/panel-de-control.css' %}" />
+
+{% endblock %} {% block content %}
+
+
+
+<div class="contenedor-general">
+  <button onclick="mostrarSeccion('section-1')">Servicios</button>
+  <button onclick="mostrarSeccion('section-2')">Profesiones</button>
+  <button onclick="mostrarSeccion('section-3')">Solicitudes para ser profesional</button>
+  <button onclick="mostrarSeccion('section-4')">Profesionales registrados</button>
+  <section class="section-1">
+    <div class="panel-section">
+      <div class="panel-header">
+        <h2>Servicios</h2>
+        <a href="/servicios/nuevo" class="btn btn-success"
+          >Crear Servicio</a
+        >
+      </div>
+
+      <ul class="panel-list">
+        {% for servicio in servicios %}
+        <li>
+          <div class="info">
+            <strong>{{ servicio.nombre }}</strong> - ${{ servicio.precio }}<br />
+            {{ servicio.descripcion|truncatechars:80 }}<br />
+            Turnos: {{ servicio.turnos|join:", " }}
+          </div>
+          <div class="actions">
+            <a href="/servicios/modificar/{{ servicio.id }}" class="btn btn-sm btn-warning">
+              Editar
+            </a>
+            <a
+              href="{% url 'eliminar_servicio' servicio.pk %}"
+              class="btn btn-sm btn-danger"
+              onclick="return confirm('¿Eliminar este servicio?');"
+              >Eliminar</a
+            >
+          </div>
+        </li>
+        {% empty %}
+        <li>No hay servicios creados aún.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+ <section class="section-2" style="display: none">
+  <div class="panel-section">
+    <div class="panel-header">
+      <h2>Profesiones</h2>
+      <a href="{% url 'crear_profesion' %}" class="btn btn-success">Crear Profesión</a>
+    </div>
+
+    <ul class="panel-list">
+      {% for profesion in profesiones %}
+      <li>
+        <div class="info">
+          <strong>{{ profesion.nombre }}</strong><br />
+          Servicios asociados:
+          {% if profesion.servicios.count %}
+            {% for servicio in profesion.servicios.all %}
+              {{ servicio.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          {% else %}
+            Ninguno
+          {% endif %}
+        </div>
+        <div class="actions">
+          <a href="{% url 'editar_profesion' profesion.pk %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'eliminar_profesion' profesion.pk %}" class="btn btn-sm btn-danger"
+             onclick="return confirm('¿Eliminar esta profesión?');">Eliminar</a>
+        </div>
+      </li>
+      {% empty %}
+      <li>No hay profesiones creadas aún.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+  <section class="section-3">
+  <div class="panel-section">
+    <div class="panel-header">
+      <h2>Solicitudes Pendientes de Profesionales</h2>
+    </div>
+
+    <ul class="panel-list">
+      {% for profesional in profesionales %}
+      <li>
+        <div class="info">
+          <strong>
+            {% if profesional.user.perfil %}
+              {{ profesional.user.perfil.nombre }} {{ profesional.user.perfil.apellido }}
+            {% else %}
+              {{ profesional.user.username }}
+            {% endif %}
+          </strong><br />
+          Profesiones solicitadas:
+          {% if profesional.profesiones.count %}
+            {% for profesion in profesional.profesiones.all %}
+              {{ profesion.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          {% else %}
+            Ninguna
+          {% endif %}
+        </div>
+        <div class="actions">
+          <a href="{% url 'aprobar_profesional' profesional.id %}" class="btn btn-sm btn-success"
+             onclick="return confirm('¿Aprobar a este profesional?');">Aceptar</a>
+          <a href="{% url 'rechazar_profesional' profesional.id %}" class="btn btn-sm btn-danger"
+             onclick="return confirm('¿Rechazar y eliminar esta solicitud?');">Rechazar</a>
+        </div>
+      </li>
+      {% empty %}
+      <li>No hay solicitudes pendientes.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+  <section class="section-4">
+    <div class="panel-section">
+      <div class="panel-header">
+        <h2>Profesionales Registrados</h2>
+      </div>
+
+      <ul class="panel-list">
+        {% for profesional in profesionales_aprobados %}
+          <li>
+            <div class="info">
+              <strong>
+                {% with profesional.user.perfil as perfil %}
+                  {{ perfil.nombre }} {{ perfil.apellido }}
+                {% endwith %}
+              </strong><br />
+              Profesiones:
+              {% for profesion in profesional.profesiones.all %}
+                {{ profesion.nombre }}{% if not forloop.last %}, {% endif %}
+              {% empty %}
+                Sin profesiones asignadas.
+              {% endfor %}
+            </div>
+            <div class="actions">
+              <a href="{% url 'eliminar_profesional' profesional.id %}" class="btn btn-sm btn-danger"
+                onclick="return confirm('¿Eliminar este profesional?');">Eliminar</a>
+            </div>
+          </li>
+        {% empty %}
+          <li>No hay profesionales registrados aún.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script src="{% static 'js/cambio_seccion.js' %}"></script>
+
+{% endblock %}

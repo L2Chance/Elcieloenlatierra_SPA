@@ -42,3 +42,7 @@ class Perfil(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - Perfil"
+    
+    @property
+    def primer_nombre(self):
+        return self.nombre.split(' ')[0] if self.nombre else ''

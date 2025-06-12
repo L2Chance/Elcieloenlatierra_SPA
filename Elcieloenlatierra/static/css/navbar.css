@@ -2,14 +2,19 @@
 
 .barra {
   width: 100%;
-
+  height: 10rem;
   background: linear-gradient(to right, #134e5e, #71b280);
   display: flex;
-  flex-direction: row;
   align-items: center;
   padding: 0 1rem;
   position: relative;
   flex-wrap: wrap;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imagen-logo {
@@ -22,109 +27,134 @@
   font-family: "Lobster", cursive;
   font-weight: 800;
   font-size: 40px;
+  margin: 0;
   margin-left: 1rem;
 }
 
-.navbar {
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.menu-navbar {
+.enlaces {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: linear-gradient(to right, #134e5e, #71b280);
-  list-style: none;
-  padding: 1rem;
   margin: 0;
-  gap: 1rem;
+  gap: 3rem;
+  margin-left: auto;
   font-family: "Lexend", sans-serif;
-  font-weight: 600;
-  color: whitesmoke;
-  width: 100%;
+  color: white;
 }
 
-.menu-navbar li {
-  transition: transform 0.3s ease;
-  flex: 1;
+.enlaces li {
+  transition: transform 300ms ease;
 }
 
-.menu-navbar li:hover {
+.enlaces li:hover {
   transform: scale(1.1);
 }
 
-.menu-navbar a {
-  text-decoration: none;
-  color: whitesmoke;
+.menu-perfil {
+  margin-left: auto;
+  margin-right: 4rem;
+  position: relative; /* importante para posicionar bien el submenu */
 }
 
-/* -------- DESKTOP -------- */
-@media (min-width: 768px) {
-  .barra {
-    flex-wrap: nowrap;
-  }
-
-  .imagen-logo {
-    height: 110px;
-  }
-
-  .imagen-titulo {
-    height: 60px;
-    margin-left: 1rem;
-  }
-
-  .navbar {
-    width: auto;
-    margin-left: auto;
-    margin-right: 5rem;
-    margin-top: 0;
-  }
-
-  .menu-navbar {
-    flex-direction: row;
-    gap: 2rem;
-    background-color: transparent;
-    padding: 0;
-  }
-}
-
-.submenu {
-  position: absolute;
-  background-color: #71b280;
-  padding: 0 1rem;
-  line-height: 2rem;
-  text-align: left;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s;
-  top: 100%;
-}
-
-.menu-navbar li:hover .submenu {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  z-index: 1000;
-}
-
-.submenu li {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  color: whitesmoke;
-  font-family: "Lexend", sans-serif;
-  font-weight: 600;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.submenu li a {
-  white-space: nowrap;
-}
-
-.imagen-perfil {
-  height: 40px;
-  width: 40px;
+.menu-perfil img {
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.submenu-perfil {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #71b280;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 300ms ease, transform 300ms ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.menu-perfil:hover .submenu-perfil {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.submenu-perfil li a {
+  display: block;
+  padding: 10px 40px;
+  color: white;
+  text-decoration: none;
+  font-family: "Lexend", sans-serif;
+  transition: background-color, font-weight 150ms ease-in-out;
+}
+
+.submenu-perfil li a:hover {
+  background-color: #4b9e61;
+  font-weight: bold;
+}
+
+/* Media query para hacer responsive */
+@media (max-width: 768px) {
+  .barra {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 1rem;
+    position: relative;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .titulo {
+    display: none;
+  }
+
+  .enlaces {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-top: 3rem;
+  }
+
+  .menu-perfil {
+    margin: 0;
+  }
+
+  .menu-perfil img {
+    width: 100px;
+    height: 100px;
+    margin-top: 3rem;
+  }
+}
+
+.cerrar-sesion-btn {
+  all: unset;
+  display: block;
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  justify-content: center;
+  color: white;
+  font-family: "Lexend", sans-serif;
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, font-weight 150ms ease-in-out;
+}
+
+.cerrar-sesion-btn:hover {
+  background-color: #eb7373;
+  color: black;
+  font-weight: bold;
 }
