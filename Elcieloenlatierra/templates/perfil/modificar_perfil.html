@@ -1,6 +1,8 @@
-{% extends "base/base.html" %} {% load static %} {% block content %}
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/editar-perfil.css' %}" />
+{% endblock %} {% block content %}
 <div class="container mt-4">
-  <h2>Modificar Perfil</h2>
+  <h2>Editar Perfil</h2>
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %} {{ form.non_field_errors }}

@@ -1,49 +1,73 @@
 .sobre-nosotros {
   display: flex;
   flex-wrap: wrap;
-  padding: 2em;
+  padding: 2em 1em;
   gap: 2em;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .sobre-nosotros .imagen {
-  flex: 1;
+  flex: 1 1 400px;
   position: relative;
   max-width: 600px;
+  transition: transform 0.3s ease;
 }
+
 .sobre-nosotros .imagen img {
   width: 100%;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   filter: brightness(70%);
+  transition: transform 0.3s ease;
+}
+
+.sobre-nosotros .imagen:hover img {
+  transform: scale(1.02);
 }
 
 .sobre-nosotros .imagen h2 {
-  padding: 0.2em 1em;
-  color: white;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Agrega sombra al texto para mayor legibilidad */
+  padding: 0.2em 1em;
+  color: white;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  margin: 0;
 }
 
 .sobre-nosotros .texto {
-  flex: 1;
+  flex: 1 1 400px;
   background-color: #006b67;
-  background-size: cover;
   color: white;
   padding: 2em;
   border-radius: 20px;
   max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.397);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.6;
   box-sizing: border-box;
-  font-size: 1.15rem;
-  height: 600px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sobre-nosotros {
+    flex-direction: column;
+    padding: 1.5em 1em;
+  }
+
+  .sobre-nosotros .texto {
+    padding: 1.5em;
+  }
+
+  .sobre-nosotros .imagen h2 {
+    font-size: 2rem;
+  }
 }

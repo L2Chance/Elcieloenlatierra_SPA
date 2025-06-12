@@ -1,34 +1,146 @@
-{% extends "base/base.html" %} {% block content %}
-<div class="container mt-4">
-  <h2 class="mb-4">Mi Perfil</h2>
+{% extends "base/base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/perfil-detalle.css' %}" />
+{% endblock %} {% block content %}
 
-  <div class="card mb-3" style="max-width: 600px">
-    <div class="row g-0">
-      <div class="col-md-4 text-center p-3">
-        <img
-          src="{{ perfil.foto_perfil.url }}"
-          alt="Foto de perfil"
-          class="img-fluid rounded-circle"
-        />
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <p>
-            <strong>Nombre:</strong> {{ perfil.nombre }} {{ perfil.apellido }}
-          </p>
-          <p><strong>Usuario:</strong> {{ request.user.username }}</p>
-          <p><strong>Email:</strong> {{ email }}</p>
-          <p><strong>DNI:</strong> {{ perfil.dni }}</p>
-          <p>
-            <strong>Género:</strong>
-            {% if perfil.genero == 'F' %}Femenino{% elif perfil.genero == 'M'
-            %}Masculino{% else %}No definido{% endif %}
-          </p>
-        </div>
-      </div>
+<section class="primer-section">
+  <div class="profile-container">
+    <div class="roles">
+      {% if user.is_staff or user.is_superuser %}
+      <a href="{% url 'admin:index' %}" class="btn-rol btn-admin"
+        >Administrador</a
+      >
+      {% elif user.profesional and user.profesional.aprobado %}
+      <a href="" class="btn-rol btn-profesional">Profesional</a>
+
+      {% elif user.perfil %}
+      <a href="{% url 'detalle_perfil' %}" class="btn-rol btn-cliente"
+        >Cliente</a
+      >
+
+      {% endif %}
     </div>
+    <img
+      src="{{ user.perfil.foto_perfil.url }}"
+      alt="Foto de perfil"
+      class="profile-avatar"
+    />
+    <a href="{% url 'editar_perfil' %}" class="edit-btn">Editar Perfil</a>
+  </div>
+  <div class="profile-details">
+    <p><strong>Nombre de usuario:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Nombre:</strong> {{ user.perfil.primer_nombre }}</p>
+    <p><strong>Apellido:</strong> {{ user.perfil.apellido }}</p>
+    <p><strong>DNI:</strong> {{ user.perfil.dni }}</p>
+    <p><strong>Género:</strong> {{ user.perfil.genero }}</p>
+    <p><strong>Teléfono:</strong> {{ user.perfil.telefono }}</p>
+  </div>
+</section>
+<div class="turnos-container">
+  <h3>Mis turnos</h3>
+
+  <div class="turno-filtros">
+    <button id="filtro-proximos" class="btn btn-outline-primary">
+      Próximos
+    </button>
+    <button id="filtro-todos" class="btn btn-outline-secondary">Todos</button>
   </div>
 
-  <a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
+  <ul class="turnos-list" id="lista-proximos">
+    {% for turno in turnos_proximos %}
+    <li class="turno-item">
+      <span class="turno-fecha">{{ turno.fecha }}</span>
+      <span class="turno-hora">{{ turno.hora }}</span>
+      <span class="turno-servicio">{{ turno.servicio.nombre }}</span>
+
+      <form
+        method="POST"
+        action="{% url 'cancelar_turno' turno.id %}"
+        style="display: inline"
+      >
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn btn-danger btn-sm"
+          title="Cancelar turno"
+          style="
+            padding: 2px 6px;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 1;
+          "
+        >
+          &times;
+        </button>
+      </form>
+    </li>
+    {% empty %}
+    <li class="sin-turnos">No tenés turnos próximos.</li>
+    {% endfor %}
+  </ul>
+
+  <ul class="turnos-list" id="lista-todos" style="display: none">
+    {% for turno in turnos_todos %}
+    <li class="turno-item">
+      <span class="turno-fecha">{{ turno.fecha }}</span>
+      <span class="turno-hora">{{ turno.hora }}</span>
+      <span class="turno-servicio">{{ turno.servicio.nombre }}</span>
+    </li>
+    {% empty %}
+    <li class="sin-turnos">No tenés turnos registrados.</li>
+    {% endfor %}
+  </ul>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnProximos = document.getElementById("filtro-proximos");
+    const btnTodos = document.getElementById("filtro-todos");
+    const listaProximos = document.getElementById("lista-proximos");
+    const listaTodos = document.getElementById("lista-todos");
+
+    btnProximos.addEventListener("click", () => {
+      listaProximos.style.display = "block";
+      listaTodos.style.display = "none";
+      btnProximos.classList.add("btn-primary");
+      btnProximos.classList.remove("btn-outline-primary");
+      btnTodos.classList.add("btn-outline-secondary");
+      btnTodos.classList.remove("btn-secondary");
+    });
+
+    btnTodos.addEventListener("click", () => {
+      listaProximos.style.display = "none";
+      listaTodos.style.display = "block";
+      btnTodos.classList.add("btn-secondary");
+      btnTodos.classList.remove("btn-outline-secondary");
+      btnProximos.classList.add("btn-outline-primary");
+      btnProximos.classList.remove("btn-primary");
+    });
+
+    // Mostrar por defecto los próximos
+    btnProximos.click();
+  });
+</script>
+
+<style>
+  @keyframes pulseEffect {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 10px #26d0ce;
+    }
+    50% {
+      transform: scale(1.2);
+      box-shadow: 0 0 25px #26d0ce;
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 10px #26d0ce;
+    }
+  }
+
+  .pulse {
+    animation: pulseEffect 0.6s ease-in-out forwards;
+  }
+</style>
+
 {% endblock %}

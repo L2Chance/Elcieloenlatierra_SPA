@@ -1,14 +1,78 @@
 <div class="barra">
-  <a href="/home"
-    ><img class="imagen-logo" src="/static/img/Logo png.png" alt="Logo"
-  /></a>
-  <a href="/home"><h1 class="texto-logo">Sentirse Bien</h1></a>
+  <div class="titulo">
+    <a href="/home">
+      <img class="imagen-logo" src="/static/img/Logo png.png" alt="Logo" />
+    </a>
+    <a href="/home">
+      <h1 class="texto-logo">Sentirse Bien</h1>
+    </a>
+  </div>
 
-  <nav class="navbar">
-    <ul class="menu-navbar" id="menuNavbar">
-      <li><a href="/home">Home</a></li>
-      <li><a href="/servicios/listado">Servicios</a></li>
-      <li><a href="/contacto">Contacto</a></li>
+  <!-- Enlaces de navegación -->
+  <ul class="enlaces" id="navEnlaces">
+    <li><a href="/home">Inicio</a></li>
+    <li><a href="/servicios/listado">Servicios</a></li>
+    <li><a href="/contacto">Contacto</a></li>
+    <li><a href="/SobreNosotros">Sobre Nosotros</a></li>
+  </ul>
+
+  <!-- Menú de perfil -->
+  <div class="menu-perfil">
+    {% if user.is_authenticated %}
+    <img src="{{ perfil_usuario.foto_perfil.url }}" alt="Imagen de perfil" />
+    {% else %}
+    <img
+      src="/static/img/foto-perfil-predeterminado.png"
+      alt="Imagen de perfil predeterminada"
+    />
+    {% endif %}
+
+    <ul class="submenu-perfil">
+      {% if user.is_authenticated %}
+      {% if user.is_superuser %}
+        <li><a href="/panel">Panel&nbsp;de&nbsp;control</a></li>
+      {% endif %}
+      <li><a href="/perfil/detalle">Perfil</a></li>
+      <li>
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="cerrar-sesion-btn">Cerrar sesión</button>
+        </form>
+      </li>
+      {% else %}
+      <li><a href="{% url 'login' %}">Iniciar&nbsp;sesión</a></li>
+      <li><a href="{% url 'registro' %}">Registrarse</a></li>
+      {% endif %}
     </ul>
-  </nav>
+  </div>
 </div>
+
+<script>
+  const menuPerfil = document.querySelector(".menu-perfil");
+  const submenu = document.querySelector(".submenu-perfil");
+  let hideTimeout;
+
+  menuPerfil.addEventListener("mouseenter", () => {
+    clearTimeout(hideTimeout);
+    submenu.style.display = "block";
+
+    // Forzar reflow para que la transición se dispare siempre
+    submenu.offsetHeight;
+
+    submenu.style.opacity = "1";
+    submenu.style.visibility = "visible";
+    submenu.style.transform = "translateY(0)";
+    submenu.style.pointerEvents = "auto";
+  });
+
+  menuPerfil.addEventListener("mouseleave", () => {
+    submenu.style.opacity = "0";
+    submenu.style.transform = "translateY(10px)";
+    submenu.style.pointerEvents = "none";
+
+    hideTimeout = setTimeout(() => {
+      submenu.style.display = "none";
+      submenu.style.visibility = "hidden";
+    }, 300); // Duración igual al CSS transition
+  });
+</script>

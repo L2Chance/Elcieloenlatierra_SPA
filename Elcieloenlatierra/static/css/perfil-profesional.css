@@ -1,0 +1,124 @@
+.perfil-profesional-container {
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.perfil-profesional-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 1.2px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+form label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #34495e;
+}
+
+form input[type="text"] {
+  width: 220px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus {
+  border-color: #2980b9;
+  outline: none;
+  box-shadow: 0 0 6px rgba(41, 128, 185, 0.4);
+}
+
+form button.btn-primary {
+  background-color: #2980b9;
+  border: none;
+  padding: 10px 22px;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button.btn-primary:hover {
+  background-color: #1c5980;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #ecf0f1;
+  margin-bottom: 30px;
+}
+
+h3 {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.turnos-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.turnos-list li {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+
+.turnos-list li:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+
+.turnos-list strong {
+  color: #34495e;
+}
+
+.turnos-list p {
+  margin-top: 8px;
+  color: #555;
+  font-style: italic;
+}
+
+p {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+/* Animación fadeIn para la lista */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
