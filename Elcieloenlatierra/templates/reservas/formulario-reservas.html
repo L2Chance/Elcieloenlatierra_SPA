@@ -51,18 +51,30 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   const formulariosContainer = document.getElementById("formularios-turnos");
-  const formsetPrefix = "{{ formset.prefix }}";
+const formsetPrefix = "{{ formset.prefix }}";
 
-  function inicializarFlatpickr() {
-    document.querySelectorAll(`input[name$="-fecha"]`).forEach((input) => {
-      if (!input._flatpickr) {
-        flatpickr(input, {
-          dateFormat: "Y-m-d",
-          minDate: "today",
-        });
-      }
-    });
-  }
+function inicializarFlatpickr() {
+  document.querySelectorAll(`input[name$="-fecha"]`).forEach((input) => {
+    if (!input._flatpickr) {
+      flatpickr(input, {
+        dateFormat: "Y-m-d",
+        minDate: new Date(), 
+        disable: [
+          function(date) {
+            const hoy = new Date();
+            const manana = new Date();
+            manana.setDate(hoy.getDate() + 1);
+
+            return (
+              date.toDateString() === hoy.toDateString() ||
+              date.toDateString() === manana.toDateString()
+            );
+          }
+        ]
+      });
+    }
+  });
+}
 
   function actualizarIndicesYTotalForms() {
     const formularios = Array.from(
