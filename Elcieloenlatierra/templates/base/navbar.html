@@ -30,7 +30,10 @@
     <ul class="submenu-perfil">
       {% if user.is_authenticated %}
       {% if user.is_superuser %}
-        <li><a href="/panel">Panel&nbsp;de&nbsp;control</a></li>
+        <li><a href="/panel">Administración</a></li>
+      {% endif %}
+      {% if user.profesional and user.profesional.aprobado %}
+      <li><a href="/perfil/profesional">Perfil profesional</a></li>
       {% endif %}
       <li><a href="/perfil/detalle">Perfil</a></li>
       <li>

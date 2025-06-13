@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/crear-profesion.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="registro-profesional-container">
+  <h2>Crear una nueva profesión</h2>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="form-group">
+      {{ form.nombre.label_tag }}
+      {{ form.nombre }}
+      {% if form.nombre.errors %}
+        <div class="error">{{ form.nombre.errors }}</div>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      {{ form.servicios.label_tag }}
+      {{ form.servicios }}
+      {% if form.servicios.errors %}
+        <div class="error">{{ form.servicios.errors }}</div>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn-submit">Crear nueva profesión</button>
+  </form>
+</div>
+{% endblock %}

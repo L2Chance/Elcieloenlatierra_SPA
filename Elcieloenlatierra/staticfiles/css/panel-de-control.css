@@ -1,3 +1,19 @@
+#chatbot-container {
+  display: none;
+}
+
+
+.contenedor-general{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.direcciones{
+  display: flex;
+}
+
 /* Mostrar solo la primera sección al cargar */
 .contenedor-general section {
   display: none;
@@ -6,23 +22,101 @@
 .contenedor-general .section-1 {
   display: block;
 }
-/* Botones de navegación */
+
+/* Botones estilo modernizado */
 button {
-  padding: 10px 20px;
-  margin: 10px 5px;
-  background-color: #007bff;
-  color: white;
+  padding: 12px 28px;
+  margin: 10px 8px;
+  font-weight: 600;
+  font-size: 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+  color: white;
+  background: linear-gradient(135deg, #4a90e2, #357ABD);
+  box-shadow: 0 4px 8px rgba(70, 130, 220, 0.3);
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+  user-select: none;
+  display: inline-block;
+  text-align: center;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #357ABD, #2a5d8f);
+  box-shadow: 0 6px 14px rgba(53, 122, 189, 0.5);
+  transform: translateY(-2px);
 }
 
+button:active {
+  background: linear-gradient(135deg, #2a5d8f, #1f4368);
+  box-shadow: 0 2px 6px rgba(30, 65, 104, 0.6);
+  transform: translateY(1px);
+}
+
+/* Variantes para los botones de acciones con colores específicos */
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #1e7e34, #145c23);
+  box-shadow: 0 6px 14px rgba(30, 124, 36, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-success:active {
+  background: linear-gradient(135deg, #145c23, #0f3f16);
+  box-shadow: 0 2px 6px rgba(15, 63, 22, 0.6);
+  transform: translateY(1px);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107, #cc9a06);
+  color: #212529;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #cc9a06, #997804);
+  box-shadow: 0 6px 14px rgba(204, 154, 6, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-warning:active {
+  background: linear-gradient(135deg, #997804, #665302);
+  box-shadow: 0 2px 6px rgba(102, 83, 2, 0.6);
+  transform: translateY(1px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #a52834);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #a52834, #7a1b28);
+  box-shadow: 0 6px 14px rgba(165, 40, 52, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-danger:active {
+  background: linear-gradient(135deg, #7a1b28, #4f0f1b);
+  box-shadow: 0 2px 6px rgba(79, 15, 27, 0.6);
+  transform: translateY(1px);
+}
+
+/* Para el botón activo (nav) */
+button.activo {
+  background: linear-gradient(135deg, #004a99, #003366);
+  box-shadow: 0 0 14px rgba(0, 75, 153, 0.7);
+  color: #fff;
+  font-weight: 700;
+  pointer-events: none; /* para que no se pueda volver a clickear */
+}
+
+/* Contenedor general */
 .contenedor-general {
   max-width: 1100px;
   margin: 30px auto;
@@ -84,30 +178,62 @@ button:hover {
   font-size: 0.9rem;
 }
 
+/* Los estilos .btn-xxx para los links */
 .actions .btn-warning {
-  background-color: #ffc107;
-  color: black;
+  background: linear-gradient(135deg, #ffc107, #cc9a06);
+  color: #212529;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+}
+
+.actions .btn-warning:hover {
+  background: linear-gradient(135deg, #cc9a06, #997804);
+  box-shadow: 0 6px 14px rgba(204, 154, 6, 0.5);
+  transform: translateY(-2px);
+}
+
+.actions .btn-warning:active {
+  background: linear-gradient(135deg, #997804, #665302);
+  box-shadow: 0 2px 6px rgba(102, 83, 2, 0.6);
+  transform: translateY(1px);
 }
 
 .actions .btn-danger {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #a52834);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
   color: white;
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+}
+
+.actions .btn-danger:hover {
+  background: linear-gradient(135deg, #a52834, #7a1b28);
+  box-shadow: 0 6px 14px rgba(165, 40, 52, 0.5);
+  transform: translateY(-2px);
+}
+
+.actions .btn-danger:active {
+  background: linear-gradient(135deg, #7a1b28, #4f0f1b);
+  box-shadow: 0 2px 6px rgba(79, 15, 27, 0.6);
+  transform: translateY(1px);
 }
 
 .actions .btn-success {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
   color: white;
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
 }
 
-.btn-success:hover,
-.btn-warning:hover,
-.btn-danger:hover {
-  opacity: 0.85;
+.actions .btn-success:hover {
+  background: linear-gradient(135deg, #1e7e34, #145c23);
+  box-shadow: 0 6px 14px rgba(30, 124, 36, 0.5);
+  transform: translateY(-2px);
 }
 
-button.activo {
-  background-color: #0056b3;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+.actions .btn-success:active {
+  background: linear-gradient(135deg, #145c23, #0f3f16);
+  box-shadow: 0 2px 6px rgba(15, 63, 22, 0.6);
+  transform: translateY(1px);
 }
 
 /* Animación fadeIn */
@@ -119,5 +245,89 @@ button.activo {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Para pantallas hasta 768px (tablets y móviles grandes) */
+@media (max-width: 768px) {
+  .contenedor-general {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  /* .direcciones pasa a columna para que los botones queden apilados */
+  .direcciones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Botones se expanden al 100% y con margen reducido */
+  .direcciones button {
+    width: 100%;
+    max-width: 300px;
+    margin: 6px 0;
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+
+  /* Ajuste para que las secciones se vean bien */
+  .panel-section {
+    padding: 15px;
+  }
+
+  /* El texto de descripción con padding lateral para mejor lectura */
+  .panel-description {
+    max-width: 100%;
+    padding: 1rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  /* Listas y items más cómodos para toque */
+  .panel-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .panel-list .info {
+    margin-right: 0;
+    margin-bottom: 10px;
+    min-width: auto;
+  }
+
+  .panel-list .actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .actions a {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+}
+
+/* Para móviles muy pequeños, hasta 480px */
+@media (max-width: 480px) {
+  /* Botones más grandes y texto más grande */
+  .direcciones button {
+    font-size: 1.2rem;
+    padding: 16px 20px;
+  }
+
+  /* Panel header más compacto */
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .panel-header h2 {
+    margin-bottom: 10px;
+  }
+
+  /* Ajuste extra en listas */
+  .panel-list li {
+    padding: 12px;
   }
 }

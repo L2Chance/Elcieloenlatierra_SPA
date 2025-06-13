@@ -1,285 +1,355 @@
+/* Importar fuente Poppins de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+
+.descripcion{
+  margin-top: 2rem;
+}
+
+/* Estilos para los títulos h2 en contenedor-tabla */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #357ABD;
+  padding-bottom: 0.3rem;
+  /* sombra ligera para un toque elegante */
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+/* Contenedor principal: flexbox, dos columnas en desktop, apilado en móvil */
 .ventana-turnos {
   display: flex;
+  gap: 2rem;
+  width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .turnos-container {
-  min-width: 700px;
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 2rem auto;
-  background: #f8f9fa;
-  border-radius: 10px;
+  flex: 1 1 35%;
+  min-width: 80%;
+  background: #fff;
+  border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
-.formulario-section h2 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
+/* Contenedor de formularios para turnos: fila horizontal con scroll */
+#formularios-turnos {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem; /* espacio para scrollbar */
+  flex-wrap: nowrap;
 }
 
+/* Formularios turnos individuales */
 .turno-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: #f8f9fa;
+  flex: 0 0 320px; /* ancho fijo para cada formulario */
   border: 1px solid #ddd;
-  min-height: 30rem;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.07);
-  font-size: 0.9rem;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 0; /* quitamos margen abajo porque están en fila */
+  background-color: #f9faff;
   position: relative;
-  transition: box-shadow 0.3s ease;
 }
 
-.turno-form:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.turno-form > .mb-3 {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.6rem;
-}
-
-.turno-form label {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: #34495e;
-  font-size: 0.85rem;
-}
-
-.turno-form select,
-.turno-form input[type="text"],
-.turno-form input[type="date"],
-.turno-form textarea {
-  border: 1px solid #ced4da;
+.mb-3 textarea {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  font-size: 1rem;
   border-radius: 6px;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.9rem;
+  border: 1px solid #ccc;
   transition: border-color 0.3s ease;
-  font-family: inherit;
+  height: 3rem;
+  max-height: 3rem;
+  resize: none;
 }
 
-.turno-form select:focus,
-.turno-form input[type="text"]:focus,
-.turno-form input[type="date"]:focus,
-.turno-form textarea:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+/* Contenedor externo para la tabla con scroll vertical */
+.contenedor-tabla {
+  overflow-x: auto;
+  padding: 1rem;
+  max-height: 800px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background-color: #fff;
+  flex: 1 1 60%;
 }
 
+/* Tabla de reservas - versión mejorada */
+.tabla-reservas {
+  width: 100%;
+  border-collapse: separate; /* separa las celdas para border-radius */
+  border-spacing: 0 6px; /* espacio vertical entre filas */
+  font-size: 0.85rem;
+  color: #444;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.tabla-reservas thead tr {
+  background-color: #1E3A8A; /* azul más oscuro */
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 6px rgba(30, 58, 138, 0.6);
+  border-radius: 12px;
+}
+
+.tabla-reservas thead th {
+  padding: 12px 15px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.tabla-reservas tbody tr {
+  background-color: #f9fbff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.tabla-reservas tbody tr:nth-child(even) {
+  background-color: #e9f0ff;
+}
+
+.tabla-reservas tbody tr:hover {
+  background-color: #d0dbf9;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.tabla-reservas tbody td {
+  padding: 10px 15px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: none;
+  color: #2e2e2e;
+}
+
+/* Acciones */
+.tabla-reservas tbody td:last-child {
+  text-align: center;
+  width: 60px;
+  padding-top: 14px;
+}
+
+.btn-eliminar {
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  background-color: #b91c1c;
+  transform: scale(1.2);
+}
+
+.btn-eliminar:active {
+  transform: scale(0.95);
+}
+
+/* Botón agregar turno estilo moderno */
+.wrapper-agregar-servicio {
+  margin-bottom: 1.5rem;
+}
+
+.boton-agregar-turno {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.boton-agregar-turno:hover {
+  background-color: #357ABD;
+  transform: translateY(-1px);
+}
+
+.boton-agregar-turno:active {
+  transform: scale(0.98);
+  background-color: #2f6cad;
+}
+
+/* Botón eliminar turno pequeño y en esquina */
 .btn-eliminar-turno {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 10px;
+  right: 10px;
   background: #e74c3c;
+  color: white;
   border: none;
-  color: #fff;
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
+  font-weight: bold;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.8rem;
-  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(231, 76, 60, 0.3);
 }
 
 .btn-eliminar-turno:hover {
   background: #c0392b;
+  transform: translateY(-1px);
 }
 
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 700;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-hr {
-  border-color: #dee2e6;
-  margin-top: 1rem;
+/* Labels y inputs estilo bootstrap-like */
+.mb-3 {
   margin-bottom: 1rem;
 }
 
-#formularios-turnos {
-  display: flex;
-  align-items: center;
-  padding: 2rem;
-  gap: 15px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  white-space: nowrap;
+.mb-3 label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #333;
 }
 
-#formularios-turnos::-webkit-scrollbar {
-  height: 8px;
+.mb-3 input,
+.mb-3 select {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
 }
 
-#formularios-turnos::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+.mb-3 input:focus,
+.mb-3 select:focus,
+.mb-3 textarea:focus {
+  border-color: #357ABD;
+  outline: none;
+  box-shadow: 0 0 6px rgba(53, 122, 189, 0.5);
 }
 
-#formularios-turnos::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.turno-form textarea {
-  height: 50px; /* o menos, ajustá según lo que prefieras */
-  resize: vertical; /* o 'none' si no querés que el usuario lo pueda agrandar */
-}
-
-.containerMas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 8rem;
-  flex: 0 0 220px;
-  background: #e0f7fa;
-  border: 2px dashed #00acc1;
-  border-radius: 8px;
-  padding: 20px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #007c91;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  text-decoration: none;
-  gap: 10px;
-}
-
-.containerMas:hover {
-  background: #b2ebf2;
-  border-color: #007c91;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #2a5d8f, #357ABD);
+  box-shadow: 0 6px 18px rgba(42, 93, 143, 0.35);
   transform: translateY(-2px);
 }
 
-.icono-agregar img {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
+form button[type="submit"]:active {
+  transform: scale(0.97);
 }
 
-.containerMas:hover .icono-agregar img {
-  transform: scale(1.15);
-}
-
-.containerMas h2 {
-  font-size: 1.1rem;
-  margin: 0;
-  font-weight: 600;
-}
-
-.turno-form input[type="checkbox"][name$="-DELETE"] {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .turnos-container {
-    max-width: 100%;
-    padding: 1rem;
-  }
-
-  #formularios-turnos {
-    flex-direction: column; /* cambias fila horizontal a columna */
-    overflow-x: visible; /* quitás scroll horizontal */
-  }
-
-  .turno-form {
-    min-height: auto; /* que no tenga altura fija */
-    width: 100%; /* que ocupe todo el ancho del celular */
-    margin-bottom: 1rem;
-    min-height: 35rem;
-  }
-
-  .containerMas {
-    flex: 1 1 auto; /* que se adapte en columna */
-    min-height: auto;
-    width: 100%;
-  }
-}
-
-.tabla-reservas {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: "Segoe UI", sans-serif;
-}
-
-.tabla-reservas thead {
-  background-color: #007bff;
-  color: white;
-  text-align: left;
-}
-
-.tabla-reservas th,
-.tabla-reservas td {
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-}
-
-.tabla-reservas tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.tabla-reservas tr:hover {
-  background-color: #f1f1f1;
-}
-
-.tabla-reservas th {
-  font-weight: 600;
-}
-
-.tabla-reservas td {
-  vertical-align: top;
-}
-
-@media (max-width: 768px) {
-  .tabla-reservas {
-    font-size: 14px;
-  }
-
-  .tabla-reservas th,
-  .tabla-reservas td {
-    padding: 10px;
-  }
-}
-
+/* Botones eliminar fila tabla */
 .btn-eliminar {
-  background-color: #e74c3c;
+  background: #e74c3c;
   color: white;
   border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+  line-height: 1;
+  padding: 0;
 }
 
 .btn-eliminar:hover {
-  background-color: #c0392b;
+  background: #c0392b;
+  transform: scale(1.1);
+}
+
+.btn-eliminar:active {
+  transform: scale(0.95);
+}
+
+/* Responsive para móviles */
+@media (max-width: 900px) {
+  .ventana-turnos {
+    flex-direction: column;
+    width: 100%; /* para que no quede con ancho fijo */
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .turnos-container,
+  .contenedor-tabla {
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem; /* separar secciones verticalmente */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  }
+
+  /* Tabla con fuente más pequeña para móvil */
+  .tabla-reservas {
+    font-size: 0.75rem;
+  }
+
+  /* Formularios apilan vertical y ajustan tamaño */
+  #formularios-turnos {
+    flex-direction: column;
+    overflow-x: visible;
+    padding-bottom: 0;
+    gap: 1rem;
+  }
+
+  .turno-form {
+    flex: 1 1 auto;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Ajustes para textarea y inputs para que no queden muy grandes */
+  .mb-3 textarea,
+  .mb-3 input,
+  .mb-3 select {
+    font-size: 0.9rem;
+  }
+
+  /* Ajuste de botones para móvil */
+  .boton-agregar-turno {
+    width: 100%;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .btn-eliminar-turno {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+    top: 8px;
+    right: 8px;
+  }
 }

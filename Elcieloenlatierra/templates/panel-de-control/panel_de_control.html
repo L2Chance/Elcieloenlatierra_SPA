@@ -3,17 +3,25 @@
 
 {% endblock %} {% block content %}
 
-
-
 <div class="contenedor-general">
-  <button onclick="mostrarSeccion('section-1')">Servicios</button>
-  <button onclick="mostrarSeccion('section-2')">Profesiones</button>
-  <button onclick="mostrarSeccion('section-3')">Solicitudes para ser profesional</button>
-  <button onclick="mostrarSeccion('section-4')">Profesionales registrados</button>
+  
+  <div class="direcciones"> 
+    <a href="/turnos"><button>Turnos</button></a>
+    <button onclick="mostrarSeccion('section-1')">Servicios</button>
+    <button onclick="mostrarSeccion('section-2')">Profesiones</button>
+    <button onclick="mostrarSeccion('section-3')">Solicitudes</button>
+    <button onclick="mostrarSeccion('section-4')">Profesionales</button>
+    <button onclick="mostrarSeccion('section-5')">Ganancias</button>
+  </div>
   <section class="section-1">
+
+    <p class="panel-description">
+     Desde aquí podés gestionar los servicios ofrecidos: crearlos, editarlos o eliminarlos según sea necesario.
+    </p>
     <div class="panel-section">
       <div class="panel-header">
         <h2>Servicios</h2>
+
         <a href="/servicios/nuevo" class="btn btn-success"
           >Crear Servicio</a
         >
@@ -47,10 +55,11 @@
   </section>
 
  <section class="section-2" style="display: none">
+  <p class="panel-description">Gestioná las distintas profesiones que pueden ofrecer servicios en la plataforma.</p>
   <div class="panel-section">
     <div class="panel-header">
       <h2>Profesiones</h2>
-      <a href="{% url 'crear_profesion' %}" class="btn btn-success">Crear Profesión</a>
+      <a href="/crear-profesion" class="btn btn-success">Crear Profesión</a>
     </div>
 
     <ul class="panel-list">
@@ -81,6 +90,7 @@
 </section>
 
   <section class="section-3">
+  <p class="panel-description">Revisá y aprobá o rechazá las solicitudes de usuarios que quieren ser profesionales.</p>
   <div class="panel-section">
     <div class="panel-header">
       <h2>Solicitudes Pendientes de Profesionales</h2>
@@ -121,6 +131,7 @@
 </section>
 
   <section class="section-4">
+    <p class="panel-description">Visualizá y administrá a todos los profesionales que forman parte de tu sistema.</p>
     <div class="panel-section">
       <div class="panel-header">
         <h2>Profesionales Registrados</h2>
@@ -153,7 +164,47 @@
       </ul>
     </div>
   </section>
+
+  <section class="section-5" style="display: none">
+    <p class="panel-description">
+      Visualizá las ganancias generadas por cada servicio según los turnos registrados.
+    </p>
+    <div class="panel-section">
+      <div class="panel-header">
+        <h2>Ganancias por Servicio</h2>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Servicio</th>
+              <th>Precio Unitario</th>
+              <th>Turnos Totales</th>
+              <th>Total Ganado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for servicio in ganancias_por_servicio %}
+              <tr>
+                <td>{{ servicio.nombre }}</td>
+                <td>${{ servicio.precio }}</td>
+                <td>{{ servicio.cantidad_turnos }}</td>
+                <td>${{ servicio.total_ganado }}</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="4">No hay servicios registrados aún.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </div>
+
+
 
 <script src="{% static 'js/cambio_seccion.js' %}"></script>
 

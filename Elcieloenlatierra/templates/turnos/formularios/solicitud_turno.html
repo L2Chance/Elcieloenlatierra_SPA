@@ -5,52 +5,13 @@
   href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
 />
 {% endblock %} {% block content %}
+
+<div class="descripcion">
+  <p class="panel-description">
+    Acá podes crear los turnos para los clientes y administrar las reservas realizadas por ellos.
+  </p>
+</div>
 <div class="ventana-turnos">
-  <div class="turnos-container">
-    <section class="formulario-section">
-      <h2>Solicitá tu turno</h2>
-      <div class="wrapper-agregar-servicio">
-        <a
-          class="containerMas boton-agregar"
-          aria-label="Agregar nuevo servicio"
-          id="btn-agregar-turno"
-        >
-          <div class="icono-agregar">
-            <img src="/static/img/SignoMas.png" alt="Agregar turno" />
-          </div>
-          <h2>Agregar otro turno</h2>
-        </a>
-      </div>
-
-      <form method="post" id="form-turnos-multiples">
-        {% csrf_token %} {{ formset.management_form }}
-
-        <div id="formularios-turnos">
-          {% for form in formset %}
-          <div class="turno-form" data-form-index="{{ forloop.counter0 }}">
-            <div class="mb-3">
-              {{ form.servicio.label_tag }} {{ form.servicio }}
-            </div>
-            <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
-            <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }}</div>
-            <div class="mb-3">{{ form.turno.label_tag }} {{ form.turno }}</div>
-            <div class="mb-3">{{ form.hora.label_tag }} {{ form.hora }}</div>
-            <div class="mb-3">{{ form.notas.label_tag }} {{ form.notas }}</div>
-
-            {{ form.DELETE }}
-
-            <button type="button" class="btn btn-danger btn-eliminar-turno">
-              X
-            </button>
-          </div>
-          {% endfor %}
-        </div>
-
-        <button type="submit" class="btn btn-primary">¡Reservar!</button>
-      </form>
-    </section>
-  </div>
-
   <div class="contenedor-tabla">
     <h2>Reservas Recibidas</h2>
     <table class="tabla-reservas">
@@ -88,7 +49,7 @@
                 class="btn-eliminar"
                 onclick="return confirm('¿Estás seguro de eliminar esta reserva?');"
               >
-                Eliminar
+                x
               </button>
             </form>
           </td>
@@ -100,6 +61,45 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+</div>
+<div class="ventana-turnos">
+  <div class="turnos-container">
+    <section class="formulario-section">
+      <h2>Solicitá tu turno</h2>
+      <div class="wrapper-agregar-servicio">
+        <button class="boton-agregar-turno" id="btn-agregar-turno">
+          + Agregar turno
+        </button>
+      </div>
+
+      <form method="post" id="form-turnos-multiples">
+        {% csrf_token %} {{ formset.management_form }}
+
+        <div id="formularios-turnos">
+          {% for form in formset %}
+          <div class="turno-form" data-form-index="{{ forloop.counter0 }}">
+            <div class="mb-3">
+              {{ form.servicio.label_tag }} {{ form.servicio }}
+            </div>
+            <div class="mb-3">{{ form.dni.label_tag }} {{ form.dni }}</div>
+            <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }}</div>
+            <div class="mb-3">{{ form.turno.label_tag }} {{ form.turno }}</div>
+            <div class="mb-3">{{ form.hora.label_tag }} {{ form.hora }}</div>
+            <div class="mb-3">{{ form.notas.label_tag }} {{ form.notas }}</div>
+
+            {{ form.DELETE }}
+
+            <button type="button" class="btn btn-danger btn-eliminar-turno">
+              X
+            </button>
+          </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">¡Reservar!</button>
+      </form>
+    </section>
   </div>
 </div>
 

@@ -11,6 +11,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404, redirect
 from apps.profesional.models import Profesional
 from django.core.mail import send_mail
+from django.db.models import Count, F, ExpressionWrapper, DecimalField
+from apps.turnos.models import Turno
 
 
 def mostrar_panel_de_control(request):
@@ -18,6 +20,15 @@ def mostrar_panel_de_control(request):
     profesiones = Profesion.objects.all()
     profesionales_pendientes = Profesional.objects.filter(aprobado=False)
     profesionales_aprobados = Profesional.objects.filter(aprobado=True)
+
+ # Agrega esta parte para calcular cantidad de turnos y ganancias por servicio
+    ganancias_por_servicio = Servicio.objects.annotate(
+        cantidad_turnos=Count('turnos_turno'),
+        total_ganado=ExpressionWrapper(
+            F('precio') * Count('turnos_turno'),
+            output_field=DecimalField(max_digits=10, decimal_places=2)
+        )
+    )
 
     servicio_form = ServicioForm()
     profesion_form = ProfesionForm()
@@ -29,6 +40,7 @@ def mostrar_panel_de_control(request):
         'profesionales_aprobados': profesionales_aprobados,
         'servicio_form': servicio_form,
         'profesion_form': profesion_form,
+        'ganancias_por_servicio': ganancias_por_servicio,
     }
 
     return render(request, 'panel-de-control/panel_de_control.html', context)
@@ -74,7 +86,7 @@ def editar_profesion(request, pk):
             return redirect('panel_control')
     else:
         form = ProfesionForm(instance=profesion)
-    return render(request, 'panel-de-control/editar_profesion.html', {'form': form})
+    return render(request, 'profesional/editar_profesion.html', {'form': form})
 
 def eliminar_profesion(request, pk):
     profesion = get_object_or_404(Profesion, pk=pk)

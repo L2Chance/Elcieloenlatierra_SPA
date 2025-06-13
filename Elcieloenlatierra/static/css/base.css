@@ -46,3 +46,31 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+/* Panel descripción */
+.panel-description {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5rem;
+  min-width: 20rem;
+  max-width: 80%;
+  margin: 5px auto 0 auto;
+  padding: 0 1.5rem;
+
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.4;
+  text-align: center;
+
+  border-radius: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.panel-description:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
