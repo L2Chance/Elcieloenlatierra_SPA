@@ -32,8 +32,12 @@
       {% if user.is_superuser %}
         <li><a href="/panel">Administración</a></li>
       {% endif %}
-      {% if user.profesional and user.profesional.aprobado %}
-      <li><a href="/perfil/profesional">Perfil profesional</a></li>
+      {% if user.groups.all.0 %}
+        {% for group in user.groups.all %}
+          {% if group.name == 'Profesional' %}
+            <li><a href="/perfil/profesional">Perfil profesional</a></li>
+          {% endif %}
+        {% endfor %}
       {% endif %}
       <li><a href="/perfil/detalle">Perfil</a></li>
       <li>

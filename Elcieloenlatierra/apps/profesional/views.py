@@ -21,6 +21,10 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 from django.utils import timezone
 from apps.perfil.models import Perfil
+from apps.turnos.models import Turno
+from django.template.loader import get_template
+from django.http import HttpResponse
+from weasyprint import HTML
 
 
 
@@ -103,44 +107,138 @@ def rechazar_profesional(request, profesional_id):
     return redirect('listar_solicitudes_profesionales')
 
 @login_required
-def mostrar_perfil_profesional(request):
-    profesional = getattr(request.user, 'profesional', None)
-    if not profesional:
+def exportar_turnos_pdf(request):
+    user = request.user
+
+    # Verificar grupo Profesional
+    if not user.groups.filter(name='Profesional').exists():
         return redirect('home')
 
-    fecha_str = request.GET.get('fecha')
-    if fecha_str:
+    dni_filtro = request.GET.get('dni', '').strip()
+    fecha_str = request.GET.get('fecha', '').strip()
+
+    queryset = Turno.objects.filter(profesional=user).order_by('fecha', 'hora')
+
+    # Filtrar por DNI si se proporciona
+    if dni_filtro:
+        queryset = queryset.filter(dni=dni_filtro)
+
+    # Filtrar por fecha si se proporciona y no hay DNI
+    fecha = None
+    if fecha_str and not dni_filtro:
         try:
             fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+            queryset = queryset.filter(fecha=fecha)
         except ValueError:
             fecha = timezone.localdate()
-    else:
+            queryset = queryset.filter(fecha=fecha)
+    elif not fecha_str and not dni_filtro:
         fecha = timezone.localdate()
+        queryset = queryset.filter(fecha=fecha)
 
-    servicios = Servicio.objects.filter(profesiones__in=profesional.profesiones.all()).distinct()
-    turnos = Turno.objects.filter(servicio__in=servicios, fecha=fecha).order_by('hora')
+    # Si hay DNI filtrado, ignorar filtro de fecha para mostrar todos los turnos de ese DNI
+    if dni_filtro:
+        fecha = None
 
-    dnis = [turno.dni for turno in turnos]
+    # Obtener perfiles de clientes según DNIs en queryset
+    dnis = queryset.values_list('dni', flat=True).distinct()
     perfiles = Perfil.objects.filter(dni__in=dnis)
     perfil_por_dni = {perfil.dni: f"{perfil.nombre} {perfil.apellido}" for perfil in perfiles}
 
-    # Crear una lista de dicts con info del turno + nombre completo del cliente
     turnos_con_cliente = []
-    for turno in turnos:
+    for turno in queryset:
         nombre_cliente = perfil_por_dni.get(turno.dni, "Desconocido")
-        turno_info = {
+        turnos_con_cliente.append({
             'servicio': turno.servicio.nombre,
             'turno': turno.turno,
             'hora': turno.hora,
             'dni': turno.dni,
             'notas': turno.notas,
             'cliente': nombre_cliente,
-        }
-        turnos_con_cliente.append(turno_info)
+            'fecha': turno.fecha,
+        })
+
+    template = get_template('profesional/pdf_turnos.html')
+    html_string = template.render({
+        'profesional': user,
+        'fecha': fecha,
+        'dni_filtrado': dni_filtro,
+        'turnos': turnos_con_cliente,
+    })
+
+    pdf = HTML(string=html_string).write_pdf()
+
+    filename = "turnos"
+    if dni_filtro:
+        filename += f"_dni_{dni_filtro}"
+    if fecha:
+        filename += f"_{fecha}"
+    filename += ".pdf"
+
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'filename={filename}'
+    return response
+
+
+
+def mostrar_perfil_profesional(request):
+    user = request.user
+
+    # Verificar si el usuario pertenece al grupo "Profesional"
+    if not user.groups.filter(name='Profesional').exists():
+        return redirect('home')
+
+    dni_filtro = request.GET.get('dni', '').strip()
+    fecha_str = request.GET.get('fecha', '').strip()
+
+    # Inicializamos queryset base de turnos del profesional actual
+    queryset = Turno.objects.filter(profesional=user).order_by('fecha', 'hora')
+
+    # Filtrar por DNI si se proporciona
+    if dni_filtro:
+        queryset = queryset.filter(dni=dni_filtro)
+
+    # Filtrar por fecha si se proporciona y no hay DNI
+    fecha = None
+    if fecha_str and not dni_filtro:
+        try:
+            fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+            queryset = queryset.filter(fecha=fecha)
+        except ValueError:
+            fecha = timezone.localdate()
+            queryset = queryset.filter(fecha=fecha)
+    elif not fecha_str and not dni_filtro:
+        # Si no hay filtro, mostrar solo turnos de hoy
+        fecha = timezone.localdate()
+        queryset = queryset.filter(fecha=fecha)
+
+    # Si hay DNI filtrado, ignorar filtro de fecha para mostrar todos los turnos de ese DNI
+    if dni_filtro:
+        fecha = None  # para que en la plantilla puedas saber que no se filtró por fecha
+
+    # Obtener los perfiles de clientes para los DNIs en turnos
+    dnis = queryset.values_list('dni', flat=True).distinct()
+    perfiles = Perfil.objects.filter(dni__in=dnis)
+    perfil_por_dni = {perfil.dni: f"{perfil.nombre} {perfil.apellido}" for perfil in perfiles}
+
+    # Preparar lista de turnos para la plantilla
+    turnos_con_cliente = []
+    for turno in queryset:
+        nombre_cliente = perfil_por_dni.get(turno.dni, "Desconocido")
+        turnos_con_cliente.append({
+            'servicio': turno.servicio.nombre,
+            'turno': turno.turno,
+            'hora': turno.hora,
+            'dni': turno.dni,
+            'notas': turno.notas,
+            'cliente': nombre_cliente,
+            'fecha': turno.fecha,
+        })
 
     context = {
-        'profesional': profesional,
+        'profesional': user,
         'turnos': turnos_con_cliente,
         'fecha_seleccionada': fecha,
+        'dni_filtrado': dni_filtro,
     }
     return render(request, 'profesional/profesional_perfil.html', context)

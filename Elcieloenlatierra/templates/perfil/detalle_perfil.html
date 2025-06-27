@@ -6,17 +6,13 @@
   <div class="profile-container">
     <div class="roles">
       {% if user.is_staff or user.is_superuser %}
-      <a href="{% url 'admin:index' %}" class="btn-rol btn-admin"
-        >Administrador</a
-      >
-      {% elif user.profesional and user.profesional.aprobado %}
-      <a href="" class="btn-rol btn-profesional">Profesional</a>
+        <a href="{% url 'admin:index' %}" class="btn-rol btn-admin">Admin</a>
 
-      {% elif user.perfil %}
-      <a href="{% url 'detalle_perfil' %}" class="btn-rol btn-cliente"
-        >Cliente</a
-      >
+      {% elif user.groups.first %}
+        <a href="#" class="btn-rol btn-{{ user.groups.first.name|lower }}">{{ user.groups.first.name }}</a>
 
+      {% else %}
+        <a href="{% url 'detalle_perfil' %}" class="btn-rol btn-cliente">Cliente</a>
       {% endif %}
     </div>
     <img
@@ -34,6 +30,14 @@
     <p><strong>DNI:</strong> {{ user.perfil.dni }}</p>
     <p><strong>Género:</strong> {{ user.perfil.genero }}</p>
     <p><strong>Teléfono:</strong> {{ user.perfil.telefono }}</p>
+
+    {% for group in user.groups.all %}
+      {% if group.name == "Profesional" %}
+        {% if user.perfil.profesion and user.perfil.profesion != "No tiene" %}
+          <p><strong>Profesión:</strong> {{ user.perfil.profesion }}</p>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   </div>
 </section>
 <div class="turnos-container">
@@ -142,11 +146,5 @@
     animation: pulseEffect 0.6s ease-in-out forwards;
   }
 </style>
-
-<div class="turnos-container center">
-  <div class="turno-item">
-    <a href="/registro-profesional">¿Quiere registrarse como profesional de Sentirse Bien Spa?</a>
-  </div>
-</div>
 
 {% endblock %}

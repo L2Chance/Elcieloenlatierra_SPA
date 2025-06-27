@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 14px;
+      margin: 30px;
+      color: #2d3a36;
+      background: #f7f9f8;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #a8d5ba;
+      padding-bottom: 15px;
+    }
+
+    header svg {
+      height: 40px;
+      width: 40px;
+      margin-right: 15px;
+      fill: #007BFF; /* azul */
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #2d3a36;
+      letter-spacing: 2px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    p.fecha {
+      text-align: center;
+      font-weight: 600;
+      color: #3c4a47;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 12px 18px;
+      border-bottom: 1px solid #d3e4d7;
+      text-align: left;
+      color: #2d3a36;
+    }
+
+    th {
+      background-color: #a8d5ba;
+      color: #1f332a;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .footer {
+      text-align: center;
+      font-style: italic;
+      margin-top: 50px;
+      color: #6e7a74;
+      font-size: 0.9rem;
+      border-top: 1px solid #a8d5ba;
+      padding-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM5 20V9h14v11H5z" />
+    </svg>
+    <h1>Spa Sentirse Bien</h1>
+  </header>
+
+  <h2 style="text-align:center; color:#2d3a36; margin-bottom:10px;">Acta de Turnos</h2>
+  <p class="fecha">Fecha: {{ fecha|date:"d/m/Y" }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>DNI</th>
+        <th>Servicio</th>
+        <th>Turno</th>
+        <th>Hora</th>
+        <th>Notas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for turno in turnos %}
+      <tr>
+        <td>{{ turno.cliente }}</td>
+        <td>{{ turno.dni }}</td>
+        <td>{{ turno.servicio }}</td>
+        <td>{{ turno.turno }}</td>
+        <td>{{ turno.hora|time:"H:i" }}</td>
+        <td>{{ turno.notas|default:"—" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Spa Sentirse Bien - Cuidando tu bienestar y armonía<br />
+    Contacto: contacto@spasentirsebien.com | +54 9 11 1234-5678
+  </div>
+</body>
+</html>

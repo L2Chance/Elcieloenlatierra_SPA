@@ -1,0 +1,31 @@
+  <div class="container mt-4">
+    <h2>Roles existentes</h2>
+
+    <!-- Botón que abre el modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearRolModal">
+      Crear nuevo rol
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="crearRolModal" tabindex="-1" aria-labelledby="crearRolModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <form method="post">
+            {% csrf_token %}
+            <div class="modal-header">
+              <h5 class="modal-title" id="crearRolModalLabel">Crear nuevo rol</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>

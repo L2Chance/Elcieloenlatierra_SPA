@@ -9,9 +9,10 @@
     <a href="/turnos"><button>Turnos</button></a>
     <button onclick="mostrarSeccion('section-1')">Servicios</button>
     <button onclick="mostrarSeccion('section-2')">Profesiones</button>
-    <button onclick="mostrarSeccion('section-3')">Solicitudes</button>
+    <button onclick="mostrarSeccion('section-3')">Usuarios</button>
     <button onclick="mostrarSeccion('section-4')">Profesionales</button>
     <button onclick="mostrarSeccion('section-5')">Ganancias</button>
+    <button onclick="mostrarSeccion('section-6')">Roles</button>
   </div>
   <section class="section-1">
 
@@ -89,46 +90,65 @@
   </div>
 </section>
 
-  <section class="section-3">
-  <p class="panel-description">Revisá y aprobá o rechazá las solicitudes de usuarios que quieren ser profesionales.</p>
-  <div class="panel-section">
-    <div class="panel-header">
-      <h2>Solicitudes Pendientes de Profesionales</h2>
-    </div>
+    <section class="section-3">
+      <p class="panel-description">Lista completa de usuarios registrados en el sistema.</p>
+      <div class="panel-section">
+        <div class="panel-header">
+          <h2>Usuarios Registrados</h2>
+        </div>
+        <input
+          type="text"
+          id="buscador-usuarios"
+          placeholder="Buscar usuario por nombre o email"
+          style="padding: 10px; width: 100%; max-width: 400px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;"
+        />
 
-    <ul class="panel-list">
-      {% for profesional in profesionales %}
-      <li>
-        <div class="info">
-          <strong>
-            {% if profesional.user.perfil %}
-              {{ profesional.user.perfil.nombre }} {{ profesional.user.perfil.apellido }}
-            {% else %}
-              {{ profesional.user.username }}
-            {% endif %}
-          </strong><br />
-          Profesiones solicitadas:
-          {% if profesional.profesiones.count %}
-            {% for profesion in profesional.profesiones.all %}
-              {{ profesion.nombre }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-          {% else %}
-            Ninguna
-          {% endif %}
-        </div>
-        <div class="actions">
-          <a href="{% url 'aprobar_profesional' profesional.id %}" class="btn btn-sm btn-success"
-             onclick="return confirm('¿Aprobar a este profesional?');">Aceptar</a>
-          <a href="{% url 'rechazar_profesional' profesional.id %}" class="btn btn-sm btn-danger"
-             onclick="return confirm('¿Rechazar y eliminar esta solicitud?');">Rechazar</a>
-        </div>
-      </li>
-      {% empty %}
-      <li>No hay solicitudes pendientes.</li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
+        <ul class="panel-list">
+          {% for usuario in usuarios %}
+          <li>
+            <div class="info">
+              <strong>
+                {% if usuario.perfil %}
+                  {{ usuario.perfil.nombre }} {{ usuario.perfil.apellido }}
+                {% else %}
+                  {{ usuario.username }}
+                {% endif %}
+              </strong><br />
+              Email: {{ usuario.email }}<br />
+              Fecha de registro: {{ usuario.date_joined|date:"d/m/Y" }}
+            </div>
+
+            <div class="actions" style="display: flex; gap: 10px; align-items: center;">
+              <!-- Formulario para asignar rol -->
+              <form method="post" action="{% url 'asignar_rol' %}" style="margin: 0;">
+                {% csrf_token %}
+                <label for="rol_{{ usuario.id }}">Rol:</label>
+                <select name="rol_{{ usuario.id }}" id="rol_{{ usuario.id }}">
+                  <option value="">-- Sin rol --</option>
+                  {% for rol in roles %}
+                    <option value="{{ rol.id }}" {% if rol in usuario.groups.all %}selected{% endif %}>{{ rol.name }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 5px;">Guardar Rol</button>
+              </form>
+
+              <!-- Formulario para eliminar usuario -->
+              <form method="post" action="{% url 'eliminar_usuario' usuario.id %}" style="margin: 0;">
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción es irreversible.')"
+                  class="btn btn-danger btn-sm"
+                >
+                  Eliminar
+                </button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
 
   <section class="section-4">
     <p class="panel-description">Visualizá y administrá a todos los profesionales que forman parte de tu sistema.</p>
@@ -202,9 +222,92 @@
       </div>
     </div>
   </section>
-</div>
 
+ <section class="section-6" style="display: none">
+  <p class="panel-description">En esta sección puedes crear nuevos roles y gestionarlos según las necesidades del sistema.</p>
+  <div class="panel-section">
+    <div class="panel-header">
+      <h2>Roles</h2>
+    </div>
+    <button onclick="abrirModal()">Crear Rol</button>
 
+    <h3 style="margin-top: 30px;">Roles existentes</h3>
+    
+    <ul class="panel-list">
+      {% for rol in roles %}
+        <li>
+          <div class="info">
+            <strong>{{ rol.name }}</strong><br>
+            {% if rol.permissions.count %}
+              Permisos asignados:
+              {% for permiso in rol.permissions.all %}
+                {{ permiso.name }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            {% else %}
+              Sin permisos asignados
+            {% endif %}
+          </div>
+        </li>
+      {% empty %}
+        <li>No hay roles creados.</li>
+      {% endfor %}
+    </ul>
+
+    <div id="modal-crear-rol" class="modal-overlay" style="display:none;">
+      <div class="modal-content modal-scrollable">
+      <form method="post" action="{% url 'crear_rol' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          {{ rol_form.nombre.label_tag }}
+          {{ rol_form.nombre }}
+        </div>
+
+        <div class="form-group">
+          {{ rol_form.permisos.label_tag }}
+          <div class="checkbox-group">
+            {{ rol_form.permisos }}
+          </div>
+        </div>
+
+        <button type="submit" name="crear_rol_submit" class="btn-success">Guardar</button>
+      </form>
+        <button onclick="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('buscador-usuarios');
+    const lista = document.querySelectorAll('.panel-list li');
+
+    input.addEventListener('input', function () {
+      const filtro = this.value.toLowerCase();
+
+      lista.forEach(item => {
+        const texto = item.textContent.toLowerCase();
+        if (texto.includes(filtro)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+function abrirModal() {
+  document.getElementById("modal-crear-rol").style.display = "flex";
+}
+
+function cerrarModal() {
+  document.getElementById("modal-crear-rol").style.display = "none";
+}
+</script>
 
 <script src="{% static 'js/cambio_seccion.js' %}"></script>
 

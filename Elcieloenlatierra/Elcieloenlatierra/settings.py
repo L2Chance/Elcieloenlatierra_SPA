@@ -20,6 +20,12 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+LANGUAGE_CODE = 'es'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
 ALLOWED_HOSTS = ['elcieloenlatierra-spa.onrender.com', 'localhost', '127.0.0.1']
 
 LOGIN_URL = '/login/'
@@ -54,6 +60,7 @@ INSTALLED_APPS = [
     'apps.reservas',
     'apps.profesion',
     'apps.panel_de_control',
+    'apps.roles',
     'cloudinary',
     'cloudinary_storage',
     "django_browser_reload",

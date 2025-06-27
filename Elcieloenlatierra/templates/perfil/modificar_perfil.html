@@ -28,6 +28,10 @@
     <div class="mb-3">{{ form.genero.label_tag }} {{ form.genero }}</div>
     <div class="mb-3">{{ form.telefono.label_tag }} {{ form.telefono }}</div>
 
+    {% if user.groups.first.name == "Profesional" %}
+      <div class="mb-3">{{ form.profesion.label_tag }} {{ form.profesion }}</div>
+    {% endif %}
+
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
   </form>
 </div>

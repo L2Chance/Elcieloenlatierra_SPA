@@ -21,5 +21,11 @@ urlpatterns = [
     path('panel/rechazar-profesional/<int:profesional_id>/', views.rechazar_profesional, name='rechazar_profesional'),
     path('eliminar-profesional/<int:profesional_id>/', views.eliminar_profesional, name='eliminar_profesional'),
 
+    #Roles
+    path('asignar-rol/', views.asignar_rol, name='asignar_rol'),
+
+    path('eliminar-usuario/<int:usuario_id>/', views.eliminar_usuario, name='eliminar_usuario'),
+
+
 
 ]

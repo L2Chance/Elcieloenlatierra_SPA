@@ -11,7 +11,7 @@
   <h2>Perfil Profesional</h2>
   <p>Desde aquí podés consultar los turnos asignados a tu profesión para cualquier fecha. Seleccioná el día que desees revisar y visualizá los detalles de cada turno disponible.</p>
 
-  <form method="get" action="">
+  <form method="get" action="" class="form-filtro-turnos">
     <label for="fecha">Seleccionar fecha:</label>
     <input
       type="text"
@@ -21,6 +21,16 @@
       value="{{ fecha_seleccionada|date:'Y-m-d' }}"
       autocomplete="off"
     />
+
+    <label for="dni">Buscar por DNI:</label>
+    <input
+      type="text"
+      id="dni"
+      name="dni"
+      placeholder="Ingresá un DNI"
+      value="{{ request.GET.dni }}"
+    />
+
     <button type="submit" class="btn btn-primary">Ver turnos</button>
   </form>
 
@@ -28,6 +38,12 @@
 
   {% if turnos %}
     <h3>Turnos para {{ fecha_seleccionada|date:"d/m/Y" }}</h3>
+
+    <a href="{% url 'exportar_turnos_pdf' %}?fecha={{ fecha_seleccionada|date:'Y-m-d' }}{% if request.GET.dni %}&dni={{ request.GET.dni }}{% endif %}" 
+      class="btn btn-secondary descargar-pdf-btn" target="_blank" rel="noopener noreferrer">
+      Descargar PDF de turnos
+    </a>
+
     <ul class="turnos-list">
         {% for turno in turnos %}
         <li>
@@ -43,16 +59,11 @@
         {% endfor %}
     </ul>
   {% else %}
-    <p>No hay turnos para esta fecha.</p>
+    <p>No hay turnos para esta fecha{% if request.GET.dni %} con DNI {{ request.GET.dni }}{% endif %}.</p>
   {% endif %}
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-  flatpickr("#fecha", {
-    dateFormat: "Y-m-d",
-    defaultDate: "{{ fecha_seleccionada|date:'Y-m-d' }}"
-  });
-</script>
 <script>
   flatpickr("#fecha", {
     dateFormat: "Y-m-d",
@@ -69,5 +80,3 @@
   });
 </script>
 {% endblock %}
-
-
