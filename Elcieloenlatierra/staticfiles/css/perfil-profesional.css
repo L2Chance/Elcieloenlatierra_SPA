@@ -17,21 +17,33 @@
   letter-spacing: 1.2px;
 }
 
-form {
+.form-filtro-turnos {
   display: flex;
-  align-items: center;
-  gap: 15px;
-  justify-content: center;
+  flex-direction: column; /* columna */
+  align-items: center;    /* aquí centramos horizontalmente */
+  gap: 12px;
   margin-bottom: 30px;
 }
 
-form label {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #34495e;
+.form-filtro-turnos label,
+.form-filtro-turnos input[type="text"],
+.form-filtro-turnos button.btn-primary {
+  width: 100%;
+  max-width: 350px;
+  text-align: center; /* para que el texto dentro del input y botón quede centrado */
 }
 
-form input[type="text"] {
+/* Opcional: si no querés que el texto dentro de inputs esté centrado, podés quitar el text-align */
+.form-filtro-turnos input[type="text"] {
+  text-align: left; /* para texto dentro del input alineado a la izquierda */
+}
+
+/* Los labels generalmente se leen mejor alineados a la izquierda, pero si querés centrarlos también: */
+.form-filtro-turnos label {
+  text-align: center; /* o 'left' si preferís */
+}
+
+.form-filtro-turnos input[type="text"] {
   width: 220px;
   padding: 8px 14px;
   font-size: 1rem;
@@ -40,13 +52,13 @@ form input[type="text"] {
   transition: border-color 0.3s ease;
 }
 
-form input[type="text"]:focus {
+.form-filtro-turnos input[type="text"]:focus {
   border-color: #2980b9;
   outline: none;
   box-shadow: 0 0 6px rgba(41, 128, 185, 0.4);
 }
 
-form button.btn-primary {
+.form-filtro-turnos button.btn-primary {
   background-color: #2980b9;
   border: none;
   padding: 10px 22px;
@@ -55,9 +67,10 @@ form button.btn-primary {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
-form button.btn-primary:hover {
+.form-filtro-turnos button.btn-primary:hover {
   background-color: #1c5980;
 }
 
@@ -80,8 +93,7 @@ h3 {
   padding: 0;
   margin: 0 auto;
   max-width: 600px;
-  animation: fadeIn 0.6s ease forwards;
-  opacity: 0;
+  opacity: 1;
 }
 
 .turnos-list li {
@@ -116,9 +128,77 @@ p {
   margin-top: 20px;
 }
 
-/* Animación fadeIn para la lista */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+.imprimir-btn {
+  background-color: #27ae60;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.imprimir-btn:hover {
+  background-color: #1e8449;
+}
+
+.descargar-pdf-btn {
+  background-color: #8e44ad;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 10px auto 20px auto;
+  text-align: center;
+  text-decoration: none;
+}
+
+.descargar-pdf-btn:hover {
+  background-color: #6c3483;
+}
+
+/* Estilos para impresión */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .perfil-profesional-container, .perfil-profesional-container * {
+    visibility: visible;
+  }
+
+  .perfil-profesional-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: none;
+  }
+
+  .form-filtro-turnos,
+  .imprimir-btn,
+  script {
+    display: none !important;
+  }
+}
+
+/* Responsive para pantallas chicas */
+@media (max-width: 600px) {
+  .form-filtro-turnos {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-filtro-turnos input[type="text"],
+  .form-filtro-turnos button.btn-primary {
+    width: 100%;
   }
 }
